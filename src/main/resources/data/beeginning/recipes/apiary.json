@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "---",
+    "#+#",
+    "###"
+  ],
+  "key": {
+    "+": [
+      {
+      "tag": "c:combs"
+    }
+    ],
+    "-": [
+      {
+        "tag": "minecraft:wooden_slabs"
+      }
+    ],
+    "#": [
+      {
+      "tag": "minecraft:planks"
+    }
+    ]
+  },
+  "result": {
+    "item": "beeginning:apiary"
+  }
+}

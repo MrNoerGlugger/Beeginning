@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "---",
+    "#+#",
+    "---"
+  ],
+  "key": {
+    "+": [
+      {
+        "item": "minecraft:string"
+      }
+    ],
+    "-": [
+      {
+        "tag": "minecraft:wooden_slabs"
+      }
+    ],
+    "#": [
+      {
+      "item": "minecraft:stick"
+      }
+    ]
+  },
+  "result": {
+    "item": "beeginning:frame"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "beeginning:ordinary_drop"
+    }
+  ],
+  "result": {
+    "item": "beeginning:honey_drop",
+    "count": 2
+  }
+}

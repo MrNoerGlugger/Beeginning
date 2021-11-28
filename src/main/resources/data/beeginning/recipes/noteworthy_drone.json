@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#+#",
+    "###"
+  ],
+  "key": {
+    "+": [
+      {
+      "tag": "c:drones"
+    }
+    ],
+    "#": [
+      {
+      "item": "beeginning:noteworthy_drop"
+    }
+    ]
+  },
+  "result": {
+    "item": "beeginning:noteworthy_drone"
+  }
+}

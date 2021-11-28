@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#-#",
+    "#+#",
+    "###"
+  ],
+  "key": {
+    "+": [
+      {
+      "item": "minecraft:iron_ingot"
+    }
+    ],
+    "-": [
+      {
+        "item": "minecraft:glass"
+      }
+    ],
+    "#": [
+      {
+      "item": "minecraft:stone"
+    }
+    ]
+  },
+  "result": {
+    "item": "beeginning:centrifuge"
+  }
+}

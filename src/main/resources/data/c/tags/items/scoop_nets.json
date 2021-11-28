@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "beeginning:wooden_scoop_net",
+    "beeginning:stone_scoop_net",
+    "beeginning:iron_scoop_net",
+    "beeginning:golden_scoop_net",
+    "beeginning:diamond_scoop_net",
+    "beeginning:netherite_scoop_net"
+  ]
+}

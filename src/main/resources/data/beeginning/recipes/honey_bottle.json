@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#+#",
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "beeginning:honey_drop"
+      }
+    ],
+    "+": [
+      {
+        "item": "minecraft:glass_bottle"
+      }
+    ]
+  },
+  "result": {
+    "item": "minecraft:honey_bottle"
+  }
+}

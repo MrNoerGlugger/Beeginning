@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "-+-",
+    "---",
+    " # "
+  ],
+  "key": {
+    "+": [
+      {
+      "tag": "minecraft:wool"
+    }
+    ],
+    "#": [
+      {
+      "item": "minecraft:stick"
+    }
+    ],
+    "-": [
+      {
+        "tag": "minecraft:stone_tool_materials"
+      }
+    ]
+  },
+  "result": {
+    "item": "beeginning:stone_scoop_net"
+  }
+}

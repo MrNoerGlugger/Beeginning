@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "beeginning:item/iron_scoop_net"
+  }
+}

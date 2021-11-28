@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "beeginning:block/apiary"},
+    "facing=east":  { "model": "beeginning:block/apiary", "y":  90},
+    "facing=south": { "model": "beeginning:block/apiary", "y": 180},
+    "facing=west":  { "model": "beeginning:block/apiary", "y": 270}
+  }
+}

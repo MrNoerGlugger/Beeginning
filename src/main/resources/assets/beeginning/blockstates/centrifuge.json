@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "beeginning:block/centrifuge"},
+    "facing=east":  { "model": "beeginning:block/centrifuge", "y":  90},
+    "facing=south": { "model": "beeginning:block/centrifuge", "y": 180},
+    "facing=west":  { "model": "beeginning:block/centrifuge", "y": 270}
+  }
+}

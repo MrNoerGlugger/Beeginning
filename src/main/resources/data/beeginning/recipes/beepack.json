@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#+#",
+    "###"
+  ],
+  "key": {
+    "+": [
+      {
+        "item": "beeginning:apiary"
+      }
+    ],
+    "#": [
+      {
+        "item": "minecraft:leather"
+      }
+    ]
+  },
+  "result": {
+    "item": "beeginning:beepack"
+  }
+}

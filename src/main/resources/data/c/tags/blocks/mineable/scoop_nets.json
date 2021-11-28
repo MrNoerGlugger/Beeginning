@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "beeginning:plain_hive",
+    "beeginning:woodland_hive",
+    "beeginning:betula_hive",
+    "beeginning:twilight_hive",
+    "beeginning:thicket_hive",
+    "beeginning:snowing_hive",
+    "beeginning:baobab_hive",
+    "beeginning:warped_hive",
+    "beeginning:crimson_hive",
+    "beeginning:shroomy_hive",
+    "beeginning:dry_hive",
+    "beeginning:mesa_hive",
+    "beeginning:morass_hive",
+    "beeginning:blooming_hive",
+    "beeginning:sea_hive",
+    "beeginning:freezing_hive",
+    "beeginning:mountainous_hive",
+    "beeginning:caving_hive",
+    "beeginning:wasting_hive",
+    "beeginning:valley_hive",
+    "beeginning:delta_hive",
+    "beeginning:finalis_hive",
+    "beeginning:void_hive"
+  ]
+}
