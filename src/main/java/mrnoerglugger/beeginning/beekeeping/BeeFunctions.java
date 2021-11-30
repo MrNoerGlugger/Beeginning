@@ -292,7 +292,7 @@ public class BeeFunctions {
         return false;
     }
     public static boolean checkClimate(World world, BlockPos pos, NbtCompound nbt) {
-        int temp = (int) (world.getBiome(pos).getTemperature(pos) * 20);
+        int temp = (int) (world.getBiome(pos).getTemperature() * 20);
         int down = (int) (world.getBiome(pos).getDownfall() * 10);
         int[] climate = getClimate(nbt);
         int temp2 = climate[0];
@@ -387,6 +387,14 @@ public class BeeFunctions {
             if(s.equals(BeeDefaultValues.species[i])) {
                 index = i; break;
             }
+        }
+        return index;
+    }
+
+    public static int getColor(NbtCompound nbt) {
+        int index = nbt.getIntArray("princess")[0] - getSpecies("amaryllis");
+        if (index < 0 || index > 16) {
+            index = 16;
         }
         return index;
     }

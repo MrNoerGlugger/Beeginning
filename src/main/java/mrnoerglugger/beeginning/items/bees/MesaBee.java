@@ -28,11 +28,11 @@ public class MesaBee {
     public static final Item MESA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item MESA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item MESA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock MESA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock MESA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerMesaBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "mesa_hive"), MESA_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "mesa_hive"), new BlockItem(MESA_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "mesa_hive"), new BlockItem(MESA_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "mesa_princess"), MESA_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "mesa_drone"), MESA_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "mesa_queen"), MESA_QUEEN);

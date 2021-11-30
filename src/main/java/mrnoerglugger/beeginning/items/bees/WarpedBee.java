@@ -28,11 +28,11 @@ public class WarpedBee {
     public static final Item WARPED_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item WARPED_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item WARPED_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock WARPED_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock WARPED_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerWarpedBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "warped_hive"), WARPED_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "warped_hive"), new BlockItem(WARPED_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "warped_hive"), new BlockItem(WARPED_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "warped_princess"), WARPED_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "warped_drone"), WARPED_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "warped_queen"), WARPED_QUEEN);

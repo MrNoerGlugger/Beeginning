@@ -28,11 +28,11 @@ public class BetulaBee {
     public static final Item BETULA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item BETULA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item BETULA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock BETULA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock BETULA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerBetulaBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "betula_hive"), BETULA_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "betula_hive"), new BlockItem(BETULA_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "betula_hive"), new BlockItem(BETULA_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "betula_princess"), BETULA_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "betula_drone"), BETULA_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "betula_queen"), BETULA_QUEEN);

@@ -28,11 +28,11 @@ public class FreezingBee {
     public static final Item FREEZING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item FREEZING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item FREEZING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock FREEZING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock FREEZING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerFreezingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "freezing_hive"), FREEZING_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "freezing_hive"), new BlockItem(FREEZING_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "freezing_hive"), new BlockItem(FREEZING_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "freezing_princess"), FREEZING_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "freezing_drone"), FREEZING_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "freezing_queen"), FREEZING_QUEEN);

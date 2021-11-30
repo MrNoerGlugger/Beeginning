@@ -28,11 +28,11 @@ public class VoidBee {
     public static final Item VOID_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item VOID_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item VOID_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock VOID_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(0).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock VOID_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(0).requiresTool().strength(1.5f));
 
     public static void registerVoidBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "void_hive"), VOID_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "void_hive"), new BlockItem(VOID_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "void_hive"), new BlockItem(VOID_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "void_princess"), VOID_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "void_drone"), VOID_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "void_queen"), VOID_QUEEN);

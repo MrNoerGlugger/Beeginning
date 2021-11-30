@@ -24,16 +24,16 @@ public class BloomingBee {
     static Item item4 = Items.POPPY;
     public static final DefaultedList<ItemStack> BloomingOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static final DefaultedList<ItemStack> BloomingCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static String[][] BloomingMutations = {};
+    public static String[][] BloomingMutations = {{"ordinary", "amaryllis"}, {"ordinary", "begonia"}, {"ordinary", "fuchsia"}, {"ordinary", "forget_me_not"}, {"ordinary", "marigold"}, {"ordinary", "bells_of_ireland"}, {"ordinary", "azalea"}, {"ordinary", "santolina"}, {"ordinary", "allium"}, {"ordinary", "ipomoea"}, {"ordinary", "lavender"}, {"ordinary", "periwinkle"}, {"ordinary", "cattleya_velutina"}, {"ordinary", "gerbera_daisy"}, {"ordinary", "rose"}, {"ordinary", "queen_of_the_night_tulip"}, {"advanced", "rainbow"}};
 
     public static final Item BLOOMING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item BLOOMING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item BLOOMING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock BLOOMING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock BLOOMING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerBloomingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "blooming_hive"), BLOOMING_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "blooming_hive"), new BlockItem(BLOOMING_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "blooming_hive"), new BlockItem(BLOOMING_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "blooming_princess"), BLOOMING_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "blooming_drone"), BLOOMING_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "blooming_queen"), BLOOMING_QUEEN);

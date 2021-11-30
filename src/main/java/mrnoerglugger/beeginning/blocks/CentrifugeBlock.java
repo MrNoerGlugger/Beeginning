@@ -31,7 +31,7 @@ public class CentrifugeBlock extends Centrifuge{
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, Beeginning.CENTRIFUGE_BLOCK_ENTITY, (world1, pos, state1, be) -> CentrifugeBlockEntity.tick(world1, pos, state1, be));
+        return checkType(type, Beeginning.CENTRIFUGE_BLOCK_ENTITY, CentrifugeBlockEntity::tick);
     }
 
     protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
@@ -49,7 +49,7 @@ public class CentrifugeBlock extends Centrifuge{
 
     public static Centrifuge CENTRIFUGE;
     public static void registerCentrifuge() {
-        CENTRIFUGE = new CentrifugeBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().requiresTool().breakByTool(FabricToolTags.PICKAXES, 2).strength(5.0f, 30.0f));
+        CENTRIFUGE = new CentrifugeBlock(FabricBlockSettings.of(Material.METAL).nonOpaque().requiresTool().strength(5.0f, 30.0f));
         Registry.register(Registry.BLOCK, new Identifier(MODID, "centrifuge"), CENTRIFUGE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "centrifuge"), new BlockItem(CENTRIFUGE, new FabricItemSettings().group(GENERIC_GROUP)));
     }

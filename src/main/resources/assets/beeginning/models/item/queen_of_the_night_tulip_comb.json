@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "beeginning:item/queen_of_the_night_tulip_comb"
+  }
+}

@@ -6,5 +6,5 @@ import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 
 public class BlockTags {
-    public static final Tag.Identified<Block> SCOOP_NET_MINEABLE = TagFactory.BLOCK.create(new Identifier("c", "mineable/scoop_nets"));
+    public static final Tag.Identified<Block> SCOOP_NET_MINEABLE = TagFactory.BLOCK.create(new Identifier("beeginning", "mineable/scoop_nets"));
 }

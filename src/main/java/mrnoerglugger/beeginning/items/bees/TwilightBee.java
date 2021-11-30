@@ -28,11 +28,11 @@ public class TwilightBee {
     public static final Item TWILIGHT_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item TWILIGHT_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item TWILIGHT_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock TWILIGHT_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock TWILIGHT_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerTwilightBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "twilight_hive"), TWILIGHT_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "twilight_hive"), new BlockItem(TWILIGHT_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "twilight_hive"), new BlockItem(TWILIGHT_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "twilight_princess"), TWILIGHT_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "twilight_drone"), TWILIGHT_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "twilight_queen"), TWILIGHT_QUEEN);

@@ -28,11 +28,11 @@ public class DeltaBee {
     public static final Item DELTA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item DELTA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item DELTA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock DELTA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock DELTA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
 
     public static void registerDeltaBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "delta_hive"), DELTA_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "delta_hive"), new BlockItem(DELTA_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "delta_hive"), new BlockItem(DELTA_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "delta_princess"), DELTA_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "delta_drone"), DELTA_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "delta_queen"), DELTA_QUEEN);

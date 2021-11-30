@@ -36,12 +36,12 @@ public class ApiaryBlock extends Apiary {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, Beeginning.APIARY_BLOCK_ENTITY, (world1, pos, state1, be) -> ApiaryBlockEntity.tick(world1, pos, state1, be));
+        return checkType(type, Beeginning.APIARY_BLOCK_ENTITY, ApiaryBlockEntity::tick);
     }
 
     protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
         Biome biome = world.getBiome(pos);
-        Climate = ArrayUtils.insert(0, Climate, biome.getTemperature(pos));
+        Climate = ArrayUtils.insert(0, Climate, biome.getTemperature());
         Climate = ArrayUtils.insert(1, Climate, biome.getDownfall());
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (player.world != null && !player.world.isClient && blockEntity instanceof ApiaryBlockEntityType) {
@@ -59,8 +59,8 @@ public class ApiaryBlock extends Apiary {
     public static Apiary APIARY2;
 
     public static void registerApiary() {
-        APIARY = new ApiaryBlock(FabricBlockSettings.of(Material.WOOD).breakByTool(FabricToolTags.AXES).luminance(12).strength(4.0f).sounds(BlockSoundGroup.WOOD));
-        APIARY2 = new ApiaryBlock(FabricBlockSettings.of(Material.WOOD).breakByTool(FabricToolTags.AXES).luminance(12).strength(4.0f).sounds(BlockSoundGroup.WOOD));
+        APIARY = new ApiaryBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).strength(4.0f).sounds(BlockSoundGroup.WOOD));
+        APIARY2 = new ApiaryBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).strength(4.0f).sounds(BlockSoundGroup.WOOD));
         Registry.register(Registry.BLOCK, new Identifier(MODID, "apiary"), APIARY);
         Registry.register(Registry.ITEM, new Identifier(MODID, "apiary"), new BlockItem(APIARY, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.BLOCK, new Identifier(MODID, "apiary2"), APIARY2);

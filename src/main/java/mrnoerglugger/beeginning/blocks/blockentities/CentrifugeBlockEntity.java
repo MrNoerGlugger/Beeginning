@@ -32,13 +32,26 @@ public class CentrifugeBlockEntity extends BlockEntity implements ImplementedInv
     final protected DefaultedList<ItemStack> items = DefaultedList.ofSize(19, ItemStack.EMPTY);
     int craftingTime;
     int craftingTimeTotal = 40;
+    ItemStack stack = ItemStack.EMPTY;
+    ItemStack stack1 = ItemStack.EMPTY;
+    Item input = Items.AIR;
+    Item input1 = Items.AIR;
     public CentrifugeBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(Beeginning.CENTRIFUGE_BLOCK_ENTITY, blockPos, blockState);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, CentrifugeBlockEntity be) {
         ItemStack comb = be.items.get(9);
+        if (be.input != Items.AIR) {
+            if (comb.getItem() != be.input) {
+                be.stack1 = be.stack.copy();
+                be.stack = ItemStack.EMPTY;
+                be.input1 = be.input;
+                be.input = Items.AIR;
+            }
+        }
         if (comb.isEmpty()) {
+            be.craftingTime = 0;
             int i;
             for (i = 0; i < 9; i++) {
                 ItemStack input = be.items.get(i);
@@ -54,23 +67,31 @@ public class CentrifugeBlockEntity extends BlockEntity implements ImplementedInv
                 be.craftingTime++;
             }
             else {
-                DefaultedList<ItemStack> list = BeeFunctions.getCombOutput(comb);
-                Random random = new Random();
-                int i = random.ints(0, list.size()).findFirst().getAsInt();
-                Item item = list.get(i).getItem();
-                int count = list.get(i).getCount();
-                ItemStack stack = new ItemStack(item, count);
+                if (be.stack == ItemStack.EMPTY) {
+                    if (be.input1 != comb.getItem()) {
+                        DefaultedList<ItemStack> list = BeeFunctions.getCombOutput(comb);
+                        Random random = new Random();
+                        int i = random.ints(0, list.size()).findFirst().getAsInt();
+                        Item item = list.get(i).getItem();
+                        int count = random.ints(1, list.get(i).getCount() + 1).findFirst().getAsInt();
+                        be.stack = new ItemStack(item, count);
+                        be.input = comb.getItem();
+                    }
+                    else {
+                        be.stack = be.stack1.copy();
+                    }
+                }
                 ItemStack[] stack3 = {be.items.get(10), be.items.get(11), be.items.get(12), be.items.get(13), be.items.get(14), be.items.get(15), be.items.get(16), be.items.get(17), be.items.get(18)};
                 int c2;
                 for (c2 = 0; c2 < stack3.length; ++c2) {
                     if (stack3[c2].getItem().asItem() == Items.AIR) {
-                        stack3[c2] = stack;
-                        stack = null;
+                        stack3[c2] = be.stack;
+                        be.stack = null;
                         break;
                     }
-                    if (!stack3[c2].isEmpty() && stack.getItem() == stack3[c2].getItem() && (stack.getCount() + stack3[c2].getCount()) < 65) {
+                    if (!stack3[c2].isEmpty() && be.stack.getItem() == stack3[c2].getItem() && (be.stack.getCount() + stack3[c2].getCount()) < 65) {
                         stack3[c2].increment(1);
-                        stack = null;
+                        be.stack = null;
                         break;
                     }
                 }
@@ -78,9 +99,11 @@ public class CentrifugeBlockEntity extends BlockEntity implements ImplementedInv
                 for (c3 = 0; c3 < stack3.length; ++c3) {
                     be.items.set(10 + c3, stack3[c3]);
                 }
-                if (stack == null) {
+                if (be.stack == null) {
                     comb.decrement(1);
                     be.craftingTime = 0;
+                    be.stack = ItemStack.EMPTY;
+                    be.input = Items.AIR;
                 }
             }
         }

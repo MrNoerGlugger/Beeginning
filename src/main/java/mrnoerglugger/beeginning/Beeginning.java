@@ -121,9 +121,9 @@ public class Beeginning implements ModInitializer {
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, nether_hive.getValue(), NETHER_HIVING);
         RegistryKey<ConfiguredFeature<?, ?>> hive_ore = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, new Identifier("beeginning", "hive_ore"));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, hive_ore.getValue(), HIVE_ORE);
+        BeeDefaultValues.createEffectArrays();
         BeeDefaultValues.registerBeeValues(BeeDefaultValues.createBaseBeeList());
         BeeDefaultValues.createBeeArrays();
-        BeeDefaultValues.createEffectArrays();
         BeeFunctions.registerBeeValues();
         ServerNetwork.init();
     }

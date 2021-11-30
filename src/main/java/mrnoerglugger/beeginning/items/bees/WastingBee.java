@@ -28,11 +28,11 @@ public class WastingBee {
     public static final Item WASTING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item WASTING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item WASTING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock WASTING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(5).breakByTool(ItemTags.SCOOP_NETS).requiresTool().strength(1.5f));;
+    public static final HiveBlock WASTING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(5).requiresTool().strength(1.5f));
 
     public static void registerWastingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "wasting_hive"), WASTING_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "wasting_hive"), new BlockItem(WASTING_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "wasting_hive"), new BlockItem(WASTING_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "wasting_princess"), WASTING_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "wasting_drone"), WASTING_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "wasting_queen"), WASTING_QUEEN);
