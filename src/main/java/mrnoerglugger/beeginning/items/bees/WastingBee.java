@@ -28,7 +28,7 @@ public class WastingBee {
     public static final Item WASTING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item WASTING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item WASTING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock WASTING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(5).requiresTool().strength(1.5f));
+    public static final HiveBlock WASTING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(5).requiresTool().strength(1.5f), WASTING_QUEEN);
 
     public static void registerWastingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "wasting_hive"), WASTING_HIVE);

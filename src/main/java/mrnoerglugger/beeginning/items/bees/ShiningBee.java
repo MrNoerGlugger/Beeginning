@@ -16,8 +16,7 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class ShiningBee {
     static Item item = TierCombs.EXTRAORDINARY_COMB;
     static Item item2 = OreCombs.SHINING_COMB;
-    static Item item3 = Items.DIAMOND_ORE;
-    static Item item4 = Items.DEEPSLATE_DIAMOND_ORE;
+    static Item item3 = Items.DIAMOND;
     public static final DefaultedList<ItemStack> ShiningOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static final DefaultedList<ItemStack> ShiningCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] ShiningMutations = {{"miraculous", "primordial"}};
@@ -33,6 +32,5 @@ public class ShiningBee {
         ShiningOutput.set(0, new ItemStack(item));
         ShiningOutput.set(1, new ItemStack(item2));
         ShiningCombOutput.set(0, new ItemStack(item3));
-        ShiningCombOutput.set(1, new ItemStack(item4));
     }
 }

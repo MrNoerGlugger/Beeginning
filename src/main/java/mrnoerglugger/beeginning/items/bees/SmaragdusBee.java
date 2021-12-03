@@ -16,8 +16,7 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class SmaragdusBee {
     static Item item = TierCombs.EXTRAORDINARY_COMB;
     static Item item2 = OreCombs.SMARAGDUS_COMB;
-    static Item item3 = Items.EMERALD_ORE;
-    static Item item4 = Items.DEEPSLATE_EMERALD_ORE;
+    static Item item3 = Items.EMERALD;
     public static final DefaultedList<ItemStack> SmaragdusOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static final DefaultedList<ItemStack> SmaragdusCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] SmaragdusMutations = {};
@@ -33,6 +32,5 @@ public class SmaragdusBee {
         SmaragdusOutput.set(0, new ItemStack(item));
         SmaragdusOutput.set(1, new ItemStack(item2));
         SmaragdusCombOutput.set(0, new ItemStack(item3));
-        SmaragdusCombOutput.set(1, new ItemStack(item4));
     }
 }

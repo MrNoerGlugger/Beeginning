@@ -2,18 +2,18 @@ package mrnoerglugger.beeginning;
 
 import mrnoerglugger.beeginning.beekeeping.BeeDefaultValues;
 import mrnoerglugger.beeginning.beekeeping.BeeFunctions;
-import mrnoerglugger.beeginning.blocks.ApiaryBlock;
-import mrnoerglugger.beeginning.blocks.CentrifugeBlock;
+import mrnoerglugger.beeginning.blocks.*;
 import mrnoerglugger.beeginning.blocks.blockentities.ApiaryBlockEntityType;
+import mrnoerglugger.beeginning.blocks.blockentities.BeeChestBlockEntityType;
 import mrnoerglugger.beeginning.blocks.blockentities.CentrifugeBlockEntityType;
-import mrnoerglugger.beeginning.items.bees.CavingBee;
+import mrnoerglugger.beeginning.blocks.blockentities.HiveBlockEntityType;
+import mrnoerglugger.beeginning.items.bees.*;
 import mrnoerglugger.beeginning.screens.ApiaryScreenHandler;
 import mrnoerglugger.beeginning.screens.BeePackScreenHandler;
 import mrnoerglugger.beeginning.screens.BeePhoneScreenHandler;
 import mrnoerglugger.beeginning.screens.CentrifugeScreenHandler;
 import mrnoerglugger.beeginning.setup.ModBlocks;
 import mrnoerglugger.beeginning.setup.ModItems;
-import mrnoerglugger.beeginning.setup.ServerNetwork;
 import mrnoerglugger.beeginning.world.EndHiveFeature;
 import mrnoerglugger.beeginning.world.HiveFeature;
 import mrnoerglugger.beeginning.world.NetherHiveFeature;
@@ -35,6 +35,7 @@ import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 
+import java.io.FileReader;
 import java.util.List;
 
 import static mrnoerglugger.beeginning.items.bees.FerrumBee.FERRUM_PRINCESS;
@@ -43,6 +44,8 @@ import static net.minecraft.stat.Stats.CUSTOM;
 public class Beeginning implements ModInitializer {
     public static BlockEntityType<ApiaryBlockEntityType> APIARY_BLOCK_ENTITY;
     public static BlockEntityType<CentrifugeBlockEntityType> CENTRIFUGE_BLOCK_ENTITY;
+    public static BlockEntityType<HiveBlockEntityType> HIVE_BLOCK_ENTITY;
+    public static BlockEntityType<BeeChestBlockEntityType> BEE_CHEST_BLOCK_ENTITY;
     public static ScreenHandlerType<ApiaryScreenHandler> APIARY_SCREEN_HANDLER;
     public static ScreenHandlerType<CentrifugeScreenHandler> CENTRIFUGE_SCREEN_HANDLER;
     public static ScreenHandlerType<BeePhoneScreenHandler> BEEPHONE_SCREEN_HANDLER;
@@ -92,7 +95,7 @@ public class Beeginning implements ModInitializer {
         APIARY_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(APIARY, ApiaryScreenHandler::new);
         CENTRIFUGE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(CENTRIFUGE, CentrifugeScreenHandler::new);
         BEEPHONE_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(BEEPHONE, BeePhoneScreenHandler::new);
-        BEEPACK_SCREEN_HANDLER = ScreenHandlerRegistry.registerExtended(BEEPACK, BeePackScreenHandler::new);
+        BEEPACK_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(BEEPACK, BeePackScreenHandler::new);
         APIARY_INTERACTIONS = register("interact_with_apiary", StatFormatter.DEFAULT);
         HIVING_FEATURE = PlacedFeatures.register("hive", HIVING.withPlacement(SquarePlacementModifier.of(), RarityFilterPlacementModifier.of(5), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP));
         END_HIVING_FEATURE = PlacedFeatures.register("end_hive", END_HIVING.withPlacement(SquarePlacementModifier.of(), RarityFilterPlacementModifier.of(75), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP));
@@ -107,6 +110,8 @@ public class Beeginning implements ModInitializer {
         ModItems.registerItems();
         APIARY_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "beeginning:apiary_block_entity", FabricBlockEntityTypeBuilder.create(ApiaryBlockEntityType::new, ApiaryBlock.APIARY).build(null));
         CENTRIFUGE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "beeginning:centrifuge_block_entity", FabricBlockEntityTypeBuilder.create(CentrifugeBlockEntityType::new, CentrifugeBlock.CENTRIFUGE).build(null));
+        HIVE_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "beeginning:hive_block_entity", FabricBlockEntityTypeBuilder.create(HiveBlockEntityType::new, PlainBee.PLAIN_HIVE, WoodlandBee.WOODLAND_HIVE, BetulaBee.BETULA_HIVE, TwilightBee.TWILIGHT_HIVE, ThicketBee.THICKET_HIVE, SnowingBee.SNOWING_HIVE, BaobabBee.BAOBAB_HIVE, WarpedBee.WARPED_HIVE, CrimsonBee.CRIMSON_HIVE, ShroomyBee.SHROOMY_HIVE, DryBee.DRY_HIVE, MesaBee.MESA_HIVE, MorassBee.MORASS_HIVE, BloomingBee.BLOOMING_HIVE, SeaBee.SEA_HIVE, FreezingBee.FREEZING_HIVE, MountainousBee.MOUNTAINOUS_HIVE, CavingBee.CAVING_HIVE, WastingBee.WASTING_HIVE, ValleyBee.VALLEY_HIVE, DeltaBee.DELTA_HIVE, FinalisBee.FINALIS_HIVE, VoidBee.VOID_HIVE).build(null));
+        BEE_CHEST_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "beeginning:bee_chest_block_entity", FabricBlockEntityTypeBuilder.create(BeeChestBlockEntityType::new, BeeChestBlock.BEE_CHEST).build(null));
         Registry.register(Registry.FEATURE, new Identifier("beeginning", "hive"), HIVE);
         Registry.register(Registry.FEATURE, new Identifier("beeginning", "tree_hive"), TREE_HIVE);
         Registry.register(Registry.FEATURE, new Identifier("beeginning", "end_hive"), END_HIVE);
@@ -125,6 +130,5 @@ public class Beeginning implements ModInitializer {
         BeeDefaultValues.registerBeeValues(BeeDefaultValues.createBaseBeeList());
         BeeDefaultValues.createBeeArrays();
         BeeFunctions.registerBeeValues();
-        ServerNetwork.init();
     }
 }

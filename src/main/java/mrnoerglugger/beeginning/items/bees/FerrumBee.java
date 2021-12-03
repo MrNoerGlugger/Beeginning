@@ -18,8 +18,7 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class FerrumBee {
     static Item item = TierCombs.ADVANCED_COMB;
     static Item item2 = OreCombs.FERRUM_COMB;
-    static Item item3 = Items.IRON_ORE;
-    static Item item4 = Items.DEEPSLATE_IRON_ORE;
+    static Item item3 = Items.RAW_IRON;
     public static final DefaultedList<ItemStack> FerrumOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static final DefaultedList<ItemStack> FerrumCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] FerrumMutations = {{"noteworthy", "engineered"}, {"noteworthy", "aurum"}, {"noteworthy", "lazurite"}, {"noteworthy", "crystal"}};
@@ -35,6 +34,5 @@ public class FerrumBee {
         FerrumOutput.set(0, new ItemStack(item));
         FerrumOutput.set(1, new ItemStack(item2));
         FerrumCombOutput.set(0, new ItemStack(item3));
-        FerrumCombOutput.set(1, new ItemStack(item4));
     }
 }

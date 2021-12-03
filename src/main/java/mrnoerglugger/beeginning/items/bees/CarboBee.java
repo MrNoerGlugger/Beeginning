@@ -16,8 +16,7 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class CarboBee {
     static Item item = TierCombs.ORDINARY_COMB;
     static Item item2 = OreCombs.CARBO_COMB;
-    static Item item3 = Items.COAL_ORE;
-    static Item item4 = Items.DEEPSLATE_COAL_ORE;
+    static Item item3 = Items.COAL;
     public static final DefaultedList<ItemStack> CarboOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static final DefaultedList<ItemStack> CarboCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] CarboMutations = {{"advanced", "ferrum"}, {"advanced", "cuprum"}, {"noteworthy", "engineered"}, {"noteworthy", "lazurite"}, {"extraodinary", "shining"}};
@@ -33,6 +32,5 @@ public class CarboBee {
         CarboOutput.set(0, new ItemStack(item));
         CarboOutput.set(1, new ItemStack(item2));
         CarboCombOutput.set(0, new ItemStack(item3));
-        CarboCombOutput.set(1, new ItemStack(item4));
     }
 }

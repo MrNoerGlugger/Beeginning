@@ -21,14 +21,17 @@ public class BetulaBee {
     static Item item = TierCombs.BASE_COMB;
     static Item item2 = BaseCombs.BETULA_COMB;
     static Item item3 = Items.BIRCH_LOG;
+    static Item item4 = Items.BIRCH_LEAVES;
+    static Item item5 = Items.BIRCH_SAPLING;
+    static Item item6 = Items.STICK;
     public static final DefaultedList<ItemStack> BetulaOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> BetulaCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> BetulaCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] BetulaMutations = {};
 
     public static final Item BETULA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item BETULA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item BETULA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock BETULA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock BETULA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), BETULA_QUEEN);
 
     public static void registerBetulaBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "betula_hive"), BETULA_HIVE);
@@ -38,6 +41,9 @@ public class BetulaBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "betula_queen"), BETULA_QUEEN);
         BetulaOutput.set(0, new ItemStack(item));
         BetulaOutput.set(1, new ItemStack(item2));
-        BetulaCombOutput.set(0, new ItemStack(item3));
+        BetulaCombOutput.set(0, new ItemStack(item3, 5));
+        BetulaCombOutput.set(1, new ItemStack(item4, 5));
+        BetulaCombOutput.set(2, new ItemStack(item5, 5));
+        BetulaCombOutput.set(3, new ItemStack(item6, 5));
     }
 }

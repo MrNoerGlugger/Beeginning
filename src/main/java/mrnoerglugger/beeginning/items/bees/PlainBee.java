@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import io.netty.buffer.Unpooled;
 import mrnoerglugger.beeginning.blocks.HiveBlock;
 import mrnoerglugger.beeginning.items.combs.BaseCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
@@ -11,6 +12,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
@@ -28,11 +30,11 @@ public class PlainBee {
     public static final Item PLAIN_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item PLAIN_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item PLAIN_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock PLAIN_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));;
+    public static final HiveBlock PLAIN_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), PLAIN_QUEEN);
 
     public static void registerPlainBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "plain_hive"), PLAIN_HIVE);
-        Registry.register(Registry.ITEM, new Identifier(MODID, "plain_hive"), new BlockItem(PLAIN_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));//
+        Registry.register(Registry.ITEM, new Identifier(MODID, "plain_hive"), new BlockItem(PLAIN_HIVE, new FabricItemSettings().group(GENERIC_GROUP)));
         Registry.register(Registry.ITEM, new Identifier(MODID, "plain_princess"), PLAIN_PRINCESS);
         Registry.register(Registry.ITEM, new Identifier(MODID, "plain_drone"), PLAIN_DRONE);
         Registry.register(Registry.ITEM, new Identifier(MODID, "plain_queen"), PLAIN_QUEEN);

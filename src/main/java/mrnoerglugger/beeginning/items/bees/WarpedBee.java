@@ -21,14 +21,16 @@ public class WarpedBee {
     static Item item = TierCombs.BASE_COMB;
     static Item item2 = BaseCombs.WARPED_COMB;
     static Item item3 = Items.WARPED_STEM;
+    static Item item4 = Items.WARPED_WART_BLOCK;
+    static Item item5 = Items.SHROOMLIGHT;
     public static final DefaultedList<ItemStack> WarpedOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> WarpedCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> WarpedCombOutput = DefaultedList.ofSize(3, ItemStack.EMPTY);
     public static String[][] WarpedMutations = {{"advanced", "silica"}};
 
     public static final Item WARPED_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item WARPED_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item WARPED_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock WARPED_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock WARPED_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), WARPED_QUEEN);
 
     public static void registerWarpedBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "warped_hive"), WARPED_HIVE);
@@ -38,6 +40,8 @@ public class WarpedBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "warped_queen"), WARPED_QUEEN);
         WarpedOutput.set(0, new ItemStack(item));
         WarpedOutput.set(1, new ItemStack(item2));
-        WarpedCombOutput.set(0, new ItemStack(item3));
+        WarpedCombOutput.set(0, new ItemStack(item3, 5));
+        WarpedCombOutput.set(1, new ItemStack(item4, 5));
+        WarpedCombOutput.set(2, new ItemStack(item5, 5));
     }
 }

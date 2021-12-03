@@ -35,9 +35,9 @@ public class BeeFunctions {
     static boolean[] time = {false, true};
     static boolean[] framing = {false, true};
     public static int[] temperature = {-20, -10, 0, 10, 20, 30, 40};
-    public static int[] downfall = {0, 2, 5, 8, 10};
+    public static int[] downfall = {0, 20, 50, 80, 100};
     public static int[][] temperatureTolerance = {{0, 0}, {-19, 0}, {0, 19}, {-19, 19}, {-60, 0}, {-60, 19}, {0, 60}, {-19, 60}, {-60, 60}};
-    public static int[][] downfallTolerance = {{0, 0}, {-10, 0}, {0, 10}, {-10, 10}};
+    public static int[][] downfallTolerance = {{0, 0}, {-100, 0}, {0, 100}, {-100, 100}};
 
     static int[][] defaultValues;
     static Item[] QueenList;
@@ -211,14 +211,26 @@ public class BeeFunctions {
         int index;
         int[][] ii1 = {i1, i2};
         int[][] ii2 = {i3, i4};
-        int[][] ii = {{0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 2, 0, 0}, {0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 2, 0, 0}};
+        int[][] ii = {{0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 2, 0, 0, 0}, {0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 2, 0, 0, 0}};
         for (index = 0; index < i1.length; ++index) {
+            if (index == 9) {
+                ii[0][9] = defaultValues[ii[0][0]][9];
+                ii[1][9] = defaultValues[ii[1][0]][9];
+                ii[0][10] = defaultValues[ii[0][0]][10];
+                ii[1][10] = defaultValues[ii[1][0]][10];
+                index = index + 2;
+            }
             int[] i5 = ii1[random.ints(0, 2).findFirst().getAsInt()];
             int[] i6 = ii2[random.ints(0, 2).findFirst().getAsInt()];
             int[][] ii3 = {i5, i6};
             int i = random.ints(0, 2).findFirst().getAsInt();
             ii[0][index] = ii3[i][index];
             ii[1][index] = ii3[Math.abs(i - 1)][index];
+            if (index == 4) {
+                ii[0][index + 1] = ii3[i][index + 1];
+                ii[1][index + 1] = ii3[Math.abs(i - 1)][index + 1];
+                index++;
+            }
         }
         int[][] possibleMutations = MutationList[ii[0][0]];
         int index1;
@@ -293,14 +305,14 @@ public class BeeFunctions {
     }
     public static boolean checkClimate(World world, BlockPos pos, NbtCompound nbt) {
         int temp = (int) (world.getBiome(pos).getTemperature() * 20);
-        int down = (int) (world.getBiome(pos).getDownfall() * 10);
+        int down = (int) (world.getBiome(pos).getDownfall() * 100);
         int[] climate = getClimate(nbt);
         int temp2 = climate[0];
         int down2 = climate[1];
         int[][] climateTol = getClimateTolerance(nbt);
         int[] tempTol = climateTol[0];
         int[] downTol = climateTol[1];
-        if (temp >= ((temp2 - 10) + tempTol[0]) && temp <= ((temp2 + 10) + tempTol[1]) && down >= ((down2 - 2) + downTol[0]) && down <= ((down2 + 2) + downTol[1])) {
+        if (temp >= ((temp2 - 10) + tempTol[0]) && temp <= ((temp2 + 10) + tempTol[1]) && down >= ((down2 - 20) + downTol[0]) && down <= ((down2 + 20) + downTol[1])) {
             return true;
         }
         return false;
@@ -373,7 +385,7 @@ public class BeeFunctions {
         return i;
     }
     public static int getEffect(NbtCompound nbt) {
-        int i = effectArray[getSpecies(species[nbt.getIntArray("princess")[0]])];
+        int i = nbt.getIntArray("princess")[13];
         return i;
     }
     public static int getEffect(int[] i) {

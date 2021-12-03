@@ -21,14 +21,17 @@ public class ThicketBee {
     static Item item = TierCombs.BASE_COMB;
     static Item item2 = BaseCombs.THICKET_COMB;
     static Item item3 = Items.JUNGLE_LOG;
+    static Item item4 = Items.JUNGLE_LEAVES;
+    static Item item5 = Items.JUNGLE_SAPLING;
+    static Item item6 = Items.STICK;
     public static final DefaultedList<ItemStack> ThicketOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> ThicketCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> ThicketCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] ThicketMutations = {};
 
     public static final Item THICKET_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item THICKET_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item THICKET_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock THICKET_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(8).requiresTool().strength(1.5f));
+    public static final HiveBlock THICKET_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(8).requiresTool().strength(1.5f), THICKET_QUEEN);
 
     public static void registerThicketBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "thicket_hive"), THICKET_HIVE);
@@ -38,6 +41,9 @@ public class ThicketBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "thicket_queen"), THICKET_QUEEN);
         ThicketOutput.set(0, new ItemStack(item));
         ThicketOutput.set(1, new ItemStack(item2));
-        ThicketCombOutput.set(0, new ItemStack(item3));
+        ThicketCombOutput.set(0, new ItemStack(item3, 5));
+        ThicketCombOutput.set(1, new ItemStack(item4, 5));
+        ThicketCombOutput.set(2, new ItemStack(item5, 5));
+        ThicketCombOutput.set(3, new ItemStack(item6, 5));
     }
 }

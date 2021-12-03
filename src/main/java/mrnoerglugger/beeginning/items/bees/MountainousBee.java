@@ -28,7 +28,7 @@ public class MountainousBee {
     public static final Item MOUNTAINOUS_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item MOUNTAINOUS_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item MOUNTAINOUS_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock MOUNTAINOUS_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock MOUNTAINOUS_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), MOUNTAINOUS_QUEEN);
 
     public static void registerMountainousBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "mountainous_hive"), MOUNTAINOUS_HIVE);

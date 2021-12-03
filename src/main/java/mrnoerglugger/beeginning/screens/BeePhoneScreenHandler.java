@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.screens;
 
 import mrnoerglugger.beeginning.Beeginning;
+import mrnoerglugger.beeginning.beekeeping.BeeFunctions;
 import mrnoerglugger.beeginning.items.BeePhone;
 import mrnoerglugger.beeginning.setup.ImplementedInventory;
 import net.minecraft.entity.player.PlayerEntity;
@@ -123,6 +124,12 @@ public class BeePhoneScreenHandler extends ScreenHandler implements ImplementedI
         ItemStack honey = items.get(0);
         ItemStack drone = items.get(1);
         ItemStack princess = items.get(2);
+        if (!drone.isEmpty() && drone.getNbt() == null) {
+            BeeFunctions.setDroneValues(drone);
+        }
+        if (!princess.isEmpty() && princess.getNbt() == null) {
+            BeeFunctions.setPrincessValues(princess);
+        }
         if (!honey.isEmpty()) {
             if (!drone.isEmpty() && drone.getNbt() != null && drone.getNbt().getIntArray("checked").length != 5) {
                 honey.decrement(1);
@@ -145,20 +152,5 @@ public class BeePhoneScreenHandler extends ScreenHandler implements ImplementedI
             writeNbt();
         }
         return items;
-    }
-
-    protected Inventory toInventory(DefaultedList<ItemStack> stacks) {
-        Inventory inventory = new SimpleInventory(stacks.size());
-        for (int i = 0; i < stacks.size(); i++) {
-            inventory.setStack(i, stacks.get(i));
-        }
-        return inventory;
-    }
-    protected DefaultedList<ItemStack> toDefaultedList(Inventory inv) {
-        DefaultedList<ItemStack> stacks = DefaultedList.ofSize(inv.size(), ItemStack.EMPTY);
-        for (int i = 0; i < inv.size(); i++) {
-            stacks.set(i, inv.getStack(i));
-        }
-        return stacks;
     }
 }

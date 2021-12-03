@@ -16,8 +16,8 @@ repositories {
 
 dependencies {
     // To change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:1.18-rc4"
-    mappings "net.fabricmc:yarn:1.18-rc4+build.1:v2"
+    minecraft "com.mojang:minecraft:1.18"
+    mappings "net.fabricmc:yarn:1.18+build.1:v2"
     modImplementation "net.fabricmc:fabric-loader:0.12.6"
 
     //Fabric api

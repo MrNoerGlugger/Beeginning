@@ -28,7 +28,7 @@ public class FreezingBee {
     public static final Item FREEZING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item FREEZING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item FREEZING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock FREEZING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock FREEZING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), FREEZING_QUEEN);
 
     public static void registerFreezingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "freezing_hive"), FREEZING_HIVE);

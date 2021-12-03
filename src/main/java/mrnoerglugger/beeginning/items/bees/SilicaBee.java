@@ -16,7 +16,7 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class SilicaBee {
     static Item item = TierCombs.ADVANCED_COMB;
     static Item item2 = OreCombs.SILICA_COMB;
-    static Item item3 = Items.NETHER_QUARTZ_ORE;
+    static Item item3 = Items.QUARTZ;
     public static final DefaultedList<ItemStack> SilicaOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static final DefaultedList<ItemStack> SilicaCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] SilicaMutations = {{"noteworthy", "engineered"}, {"noteworthy", "aurum"}, {"noteworthy", "lazurite"}, {"noteworthy", "crystal"}, {"extraordinary", "shining"}, {"extraordinary", "smaragdus"}};
@@ -31,6 +31,6 @@ public class SilicaBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "silica_queen"), SILICA_QUEEN);
         SilicaOutput.set(0, new ItemStack(item));
         SilicaOutput.set(1, new ItemStack(item2));
-        SilicaCombOutput.set(0, new ItemStack(item3));
+        SilicaCombOutput.set(0, new ItemStack(item3, 2));
     }
 }

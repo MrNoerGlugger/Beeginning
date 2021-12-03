@@ -17,10 +17,9 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class CuprumBee {
     static Item item = TierCombs.ADVANCED_COMB;
     static Item item2 = OreCombs.CUPRUM_COMB;
-    static Item item3 = Items.COPPER_ORE;
-    static Item item4 = Items.DEEPSLATE_COPPER_ORE;
+    static Item item3 = Items.RAW_COPPER;
     public static final DefaultedList<ItemStack> CuprumOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> CuprumCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> CuprumCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] CuprumMutations = {{"noteworthy", "engineered"}, {"noteworthy", "aurum"}, {"noteworthy", "lazurite"}, {"noteworthy", "crystal"}};
 
     public static final Item CUPRUM_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
@@ -33,7 +32,6 @@ public class CuprumBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "cuprum_queen"), CUPRUM_QUEEN);
         CuprumOutput.set(0, new ItemStack(item));
         CuprumOutput.set(1, new ItemStack(item2));
-        CuprumCombOutput.set(0, new ItemStack(item3));
-        CuprumCombOutput.set(1, new ItemStack(item4));
+        CuprumCombOutput.set(0, new ItemStack(item3, 2));
     }
 }

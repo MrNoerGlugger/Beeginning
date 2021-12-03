@@ -18,7 +18,7 @@ public class PrimordialBee {
     static Item item2 = OreCombs.PRIMORDIAL_COMB;
     static Item item3 = Items.ANCIENT_DEBRIS;
     public static final DefaultedList<ItemStack> PrimordialOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> PrimordialCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> PrimordialCombOutput = DefaultedList.ofSize(3, ItemStack.EMPTY);
     public static String[][] PrimordialMutations = {};
 
     public static final Item PRIMORDIAL_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));

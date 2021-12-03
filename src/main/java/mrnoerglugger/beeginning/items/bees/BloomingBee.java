@@ -29,7 +29,7 @@ public class BloomingBee {
     public static final Item BLOOMING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item BLOOMING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item BLOOMING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock BLOOMING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock BLOOMING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), BLOOMING_QUEEN);
 
     public static void registerBloomingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "blooming_hive"), BLOOMING_HIVE);

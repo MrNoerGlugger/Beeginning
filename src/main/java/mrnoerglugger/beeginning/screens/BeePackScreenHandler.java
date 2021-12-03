@@ -4,10 +4,14 @@ import mrnoerglugger.beeginning.Beeginning;
 import mrnoerglugger.beeginning.items.BeePack;
 import mrnoerglugger.beeginning.items.BeePhone;
 import mrnoerglugger.beeginning.setup.InventoryUtils;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
@@ -16,41 +20,38 @@ import net.minecraft.screen.slot.Slot;
 import org.lwjgl.system.CallbackI;
 
 public class BeePackScreenHandler extends ScreenHandler {
-    protected ItemStack item;
-    private SimpleInventory inventory;
+    private Inventory inventory;
 
-    public BeePackScreenHandler(int syncId, PlayerInventory playerInventory, PacketByteBuf buf) {
-        this(syncId, playerInventory, buf.readItemStack());
+    public BeePackScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(171));
     }
 
-    public BeePackScreenHandler(int syncId, PlayerInventory playerInventory, ItemStack item) {
+    public BeePackScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(Beeginning.BEEPACK_SCREEN_HANDLER, syncId);
-        this.item = item;
+        checkSize(inventory, 171);
+        this.inventory = inventory;
+        inventory.onOpen(playerInventory.player);
 
-        if (item.getItem() instanceof BeePack) {
-            setupBeePack(playerInventory, item);
-        }
-        else {
-            PlayerEntity player = playerInventory.player;
-            this.close(player);
-        }
+        setupBeePack(playerInventory, playerInventory.player.getStackInHand(playerInventory.player.getActiveHand()));
     }
 
     private void setupBeePack(PlayerInventory playerInventory, ItemStack item) {
-        NbtList nbt = item.getOrCreateNbt().getList("Inventory", NbtElement.COMPOUND_TYPE);
-        this.inventory = new SimpleInventory(171) {
-            @Override
-            public void markDirty() {
-                item.getOrCreateNbt().put("Inventory", InventoryUtils.toTag(this));
-                super.markDirty();
-            }
-        };
-        InventoryUtils.fromTag(nbt, this.inventory);
+        if (item.getItem() instanceof BeePack) {
+            NbtList nbt = item.getOrCreateNbt().getList("Inventory", NbtElement.COMPOUND_TYPE);
+            this.inventory = new SimpleInventory(171) {
+                @Override
+                public void markDirty() {
+                    item.getOrCreateNbt().put("Inventory", InventoryUtils.toTag(this));
+                    super.markDirty();
+                }
+            };
+            InventoryUtils.fromTag(nbt, this.inventory);
+        }
         int m;
         int l;
         for (m = 0; m < 9; m++) {
             for (l = 0; l < 19; l++) {
-                this.addSlot(new BeePackInputSlot(this, this.inventory, l + m * 19, -82 + l * 18, -35 + m * 18));
+                this.addSlot(new BeePackInputSlot(this, inventory, l + m * 19, -82 + l * 18, -35 + m * 18));
             }
         }
         for (m = 0; m < 3; ++m) {
@@ -65,7 +66,7 @@ public class BeePackScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return item.getItem() instanceof BeePack;
+        return this.inventory.canPlayerUse(player);
     }
 
     @Override

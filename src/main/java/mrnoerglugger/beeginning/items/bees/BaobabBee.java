@@ -21,14 +21,17 @@ public class BaobabBee {
     static Item item = TierCombs.BASE_COMB;
     static Item item2 = BaseCombs.BAOBAB_COMB;
     static Item item3 = Items.ACACIA_LOG;
+    static Item item4 = Items.ACACIA_LEAVES;
+    static Item item5 = Items.ACACIA_SAPLING;
+    static Item item6 = Items.STICK;
     public static final DefaultedList<ItemStack> BaobabOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> BaobabCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> BaobabCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] BaobabMutations = {};
 
     public static final Item BAOBAB_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item BAOBAB_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item BAOBAB_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock BAOBAB_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));;
+    public static final HiveBlock BAOBAB_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), BAOBAB_QUEEN);;
 
     public static void registerBaobabBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "baobab_hive"), BAOBAB_HIVE);
@@ -38,6 +41,9 @@ public class BaobabBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "baobab_queen"), BAOBAB_QUEEN);
         BaobabOutput.set(0, new ItemStack(item));
         BaobabOutput.set(1, new ItemStack(item2));
-        BaobabCombOutput.set(0, new ItemStack(item3));
+        BaobabCombOutput.set(0, new ItemStack(item3, 5));
+        BaobabCombOutput.set(1, new ItemStack(item4, 5));
+        BaobabCombOutput.set(2, new ItemStack(item5, 5));
+        BaobabCombOutput.set(3, new ItemStack(item6, 5));
     }
 }

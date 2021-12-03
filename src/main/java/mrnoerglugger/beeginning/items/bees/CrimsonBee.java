@@ -21,14 +21,16 @@ public class CrimsonBee {
     static Item item = TierCombs.BASE_COMB;
     static Item item2 = BaseCombs.CRIMSON_COMB;
     static Item item3 = Items.CRIMSON_STEM;
+    static Item item4 = Items.NETHER_WART_BLOCK;
+    static Item item5 = Items.SHROOMLIGHT;
     public static final DefaultedList<ItemStack> CrimsonOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> CrimsonCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> CrimsonCombOutput = DefaultedList.ofSize(3, ItemStack.EMPTY);
     public static String[][] CrimsonMutations = {{"advanced", "silica"}};
 
     public static final Item CRIMSON_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item CRIMSON_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item CRIMSON_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock CRIMSON_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock CRIMSON_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), CRIMSON_QUEEN);
 
     public static void registerCrimsonBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "crimson_hive"), CRIMSON_HIVE);
@@ -38,6 +40,8 @@ public class CrimsonBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "crimson_queen"), CRIMSON_QUEEN);
         CrimsonOutput.set(0, new ItemStack(item));
         CrimsonOutput.set(1, new ItemStack(item2));
-        CrimsonCombOutput.set(0, new ItemStack(item3));
+        CrimsonCombOutput.set(0, new ItemStack(item3, 5));
+        CrimsonCombOutput.set(1, new ItemStack(item4, 5));
+        CrimsonCombOutput.set(2, new ItemStack(item5, 5));
     }
 }

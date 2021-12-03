@@ -21,14 +21,17 @@ public class TwilightBee {
     static Item item = TierCombs.BASE_COMB;
     static Item item2 = BaseCombs.TWILIGHT_COMB;
     static Item item3 = Items.DARK_OAK_LOG;
+    static Item item4 = Items.DARK_OAK_LEAVES;
+    static Item item5 = Items.DARK_OAK_SAPLING;
+    static Item item6 = Items.STICK;
     public static final DefaultedList<ItemStack> TwilightOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> TwilightCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> TwilightCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] TwilightMutations = {};
 
     public static final Item TWILIGHT_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item TWILIGHT_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item TWILIGHT_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock TWILIGHT_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock TWILIGHT_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), TWILIGHT_QUEEN);
 
     public static void registerTwilightBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "twilight_hive"), TWILIGHT_HIVE);
@@ -38,6 +41,9 @@ public class TwilightBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "twilight_queen"), TWILIGHT_QUEEN);
         TwilightOutput.set(0, new ItemStack(item));
         TwilightOutput.set(1, new ItemStack(item2));
-        TwilightCombOutput.set(0, new ItemStack(item3));
+        TwilightCombOutput.set(0, new ItemStack(item3, 5));
+        TwilightCombOutput.set(1, new ItemStack(item4, 5));
+        TwilightCombOutput.set(2, new ItemStack(item5, 5));
+        TwilightCombOutput.set(3, new ItemStack(item6, 5));
     }
 }

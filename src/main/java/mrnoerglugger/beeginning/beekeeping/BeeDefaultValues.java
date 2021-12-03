@@ -93,6 +93,7 @@ public class BeeDefaultValues {
         list.add(0, i);
         list.add(1, s);
         ii[0] = i;
+        ii = ArrayUtils.insert(13, ii, effect);
         list.add(2, ii);
         list.add(3, item1);
         list.add(4, item2);

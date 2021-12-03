@@ -28,7 +28,7 @@ public class MesaBee {
     public static final Item MESA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item MESA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item MESA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock MESA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock MESA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), MESA_QUEEN);
 
     public static void registerMesaBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "mesa_hive"), MESA_HIVE);

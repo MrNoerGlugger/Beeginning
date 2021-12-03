@@ -31,6 +31,6 @@ public class GlowingBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "glowing_queen"), GLOWING_QUEEN);
         GlowingOutput.set(0, new ItemStack(item));
         GlowingOutput.set(1, new ItemStack(item2));
-        GlowingCombOutput.set(0, new ItemStack(item3, 2));
+        GlowingCombOutput.set(0, new ItemStack(item3, 4));
     }
 }

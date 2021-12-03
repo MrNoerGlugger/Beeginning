@@ -28,7 +28,7 @@ public class MorassBee {
     public static final Item MORASS_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item MORASS_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item MORASS_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock MORASS_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock MORASS_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), MORASS_QUEEN);
 
     public static void registerMorassBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "morass_hive"), MORASS_HIVE);

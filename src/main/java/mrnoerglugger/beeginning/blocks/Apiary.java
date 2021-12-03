@@ -48,7 +48,7 @@ public abstract class Apiary extends BlockWithEntity implements InventoryProvide
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         Biome biome = world.getBiome(pos);
         Climate = ArrayUtils.insert(0, Climate, (int) (biome.getTemperature() * 20));
-        Climate = ArrayUtils.insert(1, Climate, (int) (biome.getDownfall() * 10));
+        Climate = ArrayUtils.insert(1, Climate, (int) (biome.getDownfall() * 100));
         if (world.isClient) {
             return ActionResult.SUCCESS;
         } else {

@@ -29,7 +29,7 @@ public class ShroomyBee {
     public static final Item SHROOMY_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item SHROOMY_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item SHROOMY_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock SHROOMY_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock SHROOMY_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), SHROOMY_QUEEN);
 
     public static void registerShroomyBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "shroomy_hive"), SHROOMY_HIVE);
@@ -39,7 +39,7 @@ public class ShroomyBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "shroomy_queen"), SHROOMY_QUEEN);
         ShroomyOutput.set(0, new ItemStack(item));
         ShroomyOutput.set(1, new ItemStack(item2));
-        ShroomyCombOutput.set(0, new ItemStack(item3));
-        ShroomyCombOutput.set(1, new ItemStack(item4));
+        ShroomyCombOutput.set(0, new ItemStack(item3, 5));
+        ShroomyCombOutput.set(1, new ItemStack(item4, 5));
     }
 }

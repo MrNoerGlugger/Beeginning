@@ -16,11 +16,9 @@ import static mrnoerglugger.beeginning.Beeginning.MODID;
 public class AurumBee {
     static Item item = TierCombs.NOTEWORTHY_COMB;
     static Item item2 = OreCombs.AURUM_COMB;
-    static Item item3 = Items.GOLD_ORE;
-    static Item item4 = Items.DEEPSLATE_GOLD_ORE;
-    static Item item5 = Items.NETHER_GOLD_ORE;
+    static Item item3 = Items.RAW_GOLD;
     public static final DefaultedList<ItemStack> AurumOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
-    public static final DefaultedList<ItemStack> AurumCombOutput = DefaultedList.ofSize(3, ItemStack.EMPTY);
+    public static final DefaultedList<ItemStack> AurumCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] AurumMutations = {{"extraordinary", "shining"}, {"extraordinary", "smaragdus"}};
 
     public static final Item AURUM_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
@@ -34,7 +32,5 @@ public class AurumBee {
         AurumOutput.set(0, new ItemStack(item));
         AurumOutput.set(1, new ItemStack(item2));
         AurumCombOutput.set(0, new ItemStack(item3));
-        AurumCombOutput.set(1, new ItemStack(item4));
-        AurumCombOutput.set(2, new ItemStack(item5));
     }
 }

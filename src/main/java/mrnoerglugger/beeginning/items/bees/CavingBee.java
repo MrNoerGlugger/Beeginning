@@ -28,7 +28,7 @@ public class CavingBee {
     public static final Item CAVING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item CAVING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item CAVING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock CAVING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock CAVING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), CAVING_QUEEN);
 
     public static void registerCavingBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "caving_hive"), CAVING_HIVE);

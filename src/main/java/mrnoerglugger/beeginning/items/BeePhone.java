@@ -47,7 +47,7 @@ public class BeePhone extends Item implements NamedScreenHandlerFactory {
         BlockPos pos = player.getBlockPos();
         Biome biome = player.getWorld().getBiome(pos);
         Climate = ArrayUtils.insert(0, Climate, (int) (biome.getTemperature() * 20));
-        Climate = ArrayUtils.insert(1, Climate, (int) (biome.getDownfall() * 10));
+        Climate = ArrayUtils.insert(1, Climate, (int) (biome.getDownfall() * 100));
         if (player.world != null && !player.world.isClient) {
             player.openHandledScreen(this);
         }

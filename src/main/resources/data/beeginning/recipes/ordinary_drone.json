@@ -8,13 +8,13 @@
   "key": {
     "+": [
       {
-      "tag": "c:drones"
-    }
+        "tag": "beeginning:drones"
+      }
     ],
     "#": [
       {
-      "item": "beeginning:ordinary_drop"
-    }
+        "item": "beeginning:ordinary_drop"
+      }
     ]
   },
   "result": {

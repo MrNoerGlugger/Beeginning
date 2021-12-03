@@ -32,7 +32,7 @@ public class CrystalBee {
         Registry.register(Registry.ITEM, new Identifier(MODID, "crystal_queen"), CRYSTAL_QUEEN);
         CrystalOutput.set(0, new ItemStack(item));
         CrystalOutput.set(1, new ItemStack(item2));
-        CrystalCombOutput.set(0, new ItemStack(item3));
+        CrystalCombOutput.set(0, new ItemStack(item3, 7));
         CrystalCombOutput.set(1, new ItemStack(item4));
     }
 }

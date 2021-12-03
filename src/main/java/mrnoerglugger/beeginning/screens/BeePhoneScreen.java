@@ -10,6 +10,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 import java.math.BigDecimal;
@@ -115,7 +116,7 @@ public class BeePhoneScreen extends HandledScreen<BeePhoneScreenHandler> {
         int[][] climate = {BeeFunctions.temperature, BeeFunctions.downfall};
         int[][][] tolerance = {BeeFunctions.temperatureTolerance, BeeFunctions.downfallTolerance};
         if (!drone.isEmpty() && princess.isEmpty() && drone.getNbt() != null) {
-            boolean checked = drone.getNbt().getIntArray("checked") != null;
+            boolean checked = drone.getNbt().getIntArray("checked").length != 0;
             if (drone.getNbt().getIntArray("drone").length != 0 && checked) {
                 int[] active = drone.getNbt().getIntArray("drone");
                 int[] inactive = drone.getNbt().getIntArray("drone_inactive");
@@ -151,8 +152,8 @@ public class BeePhoneScreen extends HandledScreen<BeePhoneScreenHandler> {
                 }
                 textRenderer.draw(matrices, AoE[active[6]][0] + "/" + AoE[active[6]][1] + "/" + AoE[active[6]][2], x2 - 184, y2 + 1, 0);
                 textRenderer.draw(matrices, AoE[inactive[6]][0] + "/" + AoE[inactive[6]][1] + "/" + AoE[inactive[6]][2], x2 + 120, y2 + 1, 0);
-                textRenderer.draw(matrices, BeeFunctions.effectStrings[BeeFunctions.getEffect(active)], x2 - 170, y2 + 15, 0);
-                textRenderer.draw(matrices, BeeFunctions.effectStrings[BeeFunctions.getEffect(inactive)], x2 + 134, y2 + 15, 0);
+                textRenderer.draw(matrices, BeeFunctions.effectStrings[active[13]], x2 - 170, y2 + 15, 0);
+                textRenderer.draw(matrices, BeeFunctions.effectStrings[inactive[13]], x2 + 134, y2 + 15, 0);
                 textRenderer.draw(matrices, framing[active[8]], x2 - 164, y2 + 29, 0);
                 textRenderer.draw(matrices, framing[inactive[8]], x2 + 140, y2 + 29, 0);
                 textRenderer.draw(matrices, time[active[7]], x2 - 182, y2 + 43, 0);
@@ -161,8 +162,8 @@ public class BeePhoneScreen extends HandledScreen<BeePhoneScreenHandler> {
                 textRenderer.draw(matrices, climate[0][inactive[9]] + "°C/" + climate[1][inactive[10]] + "%", x2 + 135, y2 + 57, 0);
                 textRenderer.draw(matrices, (tolerance[0][active[11]][0] - 10) + "°C/" + (tolerance[0][active[11]][1] + 10) + "°C", x2 - 161, y2 + 71, 0);
                 textRenderer.draw(matrices, (tolerance[0][inactive[11]][0] - 10) + "°C/" + (tolerance[0][inactive[11]][1] + 10) + "°C", x2 + 143, y2 + 71, 0);
-                textRenderer.draw(matrices, (tolerance[1][active[12]][0] - 2) + "%/" + (tolerance[1][active[12]][1] + 2) + "%", x2 - 161, y2 + 85, 0);
-                textRenderer.draw(matrices, (tolerance[1][inactive[12]][0] - 2) + "%/" + (tolerance[1][inactive[12]][1] + 2) + "%", x2 + 143, y2 + 85, 0);
+                textRenderer.draw(matrices, (tolerance[1][active[12]][0] - 20) + "%/" + (tolerance[1][active[12]][1] + 20) + "%", x2 - 161, y2 + 85, 0);
+                textRenderer.draw(matrices, (tolerance[1][inactive[12]][0] - 20) + "%/" + (tolerance[1][inactive[12]][1] + 20) + "%", x2 + 143, y2 + 85, 0);
             }
         }
         if (!princess.isEmpty() && princess.getNbt() != null) {
@@ -202,8 +203,8 @@ public class BeePhoneScreen extends HandledScreen<BeePhoneScreenHandler> {
                 }
                 textRenderer.draw(matrices, AoE[active[6]][0] + "/" + AoE[active[6]][1] + "/" + AoE[active[6]][2], x2 - 184, y2 + 1, 0);
                 textRenderer.draw(matrices, AoE[inactive[6]][0] + "/" + AoE[inactive[6]][1] + "/" + AoE[inactive[6]][2], x2 + 120, y2 + 1, 0);
-                textRenderer.draw(matrices, BeeFunctions.effectStrings[BeeFunctions.getEffect(active)], x2 - 170, y2 + 15, 0);
-                textRenderer.draw(matrices, BeeFunctions.effectStrings[BeeFunctions.getEffect(inactive)], x2 + 134, y2 + 15, 0);
+                textRenderer.draw(matrices, BeeFunctions.effectStrings[active[13]], x2 - 170, y2 + 15, 0);
+                textRenderer.draw(matrices, BeeFunctions.effectStrings[inactive[13]], x2 + 134, y2 + 15, 0);
                 textRenderer.draw(matrices, framing[active[8]], x2 - 164, y2 + 29, 0);
                 textRenderer.draw(matrices, framing[inactive[8]], x2 + 140, y2 + 29, 0);
                 textRenderer.draw(matrices, time[active[7]], x2 - 182, y2 + 43, 0);
@@ -212,8 +213,8 @@ public class BeePhoneScreen extends HandledScreen<BeePhoneScreenHandler> {
                 textRenderer.draw(matrices, climate[0][inactive[9]] + "°C/" + climate[1][inactive[10]] + "%", x2 + 135, y2 + 57, 0);
                 textRenderer.draw(matrices, (tolerance[0][active[11]][0] - 10) + "°C/" + (tolerance[0][active[11]][1] + 10) + "°C", x2 - 161, y2 + 71, 0);
                 textRenderer.draw(matrices, (tolerance[0][inactive[11]][0] - 10) + "°C/" + (tolerance[0][inactive[11]][1] + 10) + "°C", x2 + 143, y2 + 71, 0);
-                textRenderer.draw(matrices, (tolerance[1][active[12]][0] - 2) + "%/" + (tolerance[1][active[12]][1] + 2) + "%", x2 - 161, y2 + 85, 0);
-                textRenderer.draw(matrices, (tolerance[1][inactive[12]][0] - 2) + "%/" + (tolerance[1][inactive[12]][1] + 2) + "%", x2 + 143, y2 + 85, 0);
+                textRenderer.draw(matrices, (tolerance[1][active[12]][0] - 20) + "%/" + (tolerance[1][active[12]][1] + 20) + "%", x2 - 161, y2 + 85, 0);
+                textRenderer.draw(matrices, (tolerance[1][inactive[12]][0] - 20) + "%/" + (tolerance[1][inactive[12]][1] + 20) + "%", x2 + 143, y2 + 85, 0);
             }
         }
         assert client != null;

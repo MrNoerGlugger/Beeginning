@@ -28,7 +28,7 @@ public class FinalisBee {
     public static final Item FINALIS_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item FINALIS_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item FINALIS_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock FINALIS_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(5).requiresTool().strength(1.5f));
+    public static final HiveBlock FINALIS_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(5).requiresTool().strength(1.5f), FINALIS_QUEEN);
 
     public static void registerFinalisBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "finalis_hive"), FINALIS_HIVE);

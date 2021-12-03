@@ -21,7 +21,7 @@ public class InventoryUtils {
         return tag;
     }
 
-    public static void fromTag(NbtList tag, SimpleInventory inventory) {
+    public static void fromTag(NbtList tag, Inventory inventory) {
         inventory.clear();
 
         tag.forEach(element -> {

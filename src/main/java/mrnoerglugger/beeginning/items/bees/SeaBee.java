@@ -28,7 +28,7 @@ public class SeaBee {
     public static final Item SEA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
     public static final Item SEA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
     public static final Item SEA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
-    public static final HiveBlock SEA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f));
+    public static final HiveBlock SEA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), SEA_QUEEN);
 
     public static void registerSeaBee() {
         Registry.register(Registry.BLOCK, new Identifier(MODID, "sea_hive"), SEA_HIVE);
