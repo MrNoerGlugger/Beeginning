@@ -2,6 +2,7 @@ package mrnoerglugger.beeginning.blocks.blockentities;
 
 import mrnoerglugger.beeginning.Beeginning;
 import mrnoerglugger.beeginning.beekeeping.BeeFunctions;
+import mrnoerglugger.beeginning.beekeeping.BeeInventory;
 import mrnoerglugger.beeginning.screens.CentrifugeInputSlotComb;
 import mrnoerglugger.beeginning.screens.CentrifugeScreenHandler;
 import mrnoerglugger.beeginning.setup.ImplementedInventory;
@@ -72,34 +73,28 @@ public class CentrifugeBlockEntity extends BlockEntity implements ImplementedInv
                         DefaultedList<ItemStack> list = BeeFunctions.getCombOutput(comb);
                         Random random = new Random();
                         int i = random.ints(0, list.size()).findFirst().getAsInt();
-                        Item item = list.get(i).getItem();
-                        int count = random.ints(1, list.get(i).getCount() + 1).findFirst().getAsInt();
-                        be.stack = new ItemStack(item, count);
-                        be.input = comb.getItem();
+                        if (!list.get(i).isEmpty()) {
+                            Item item = list.get(i).getItem();
+                            int count = random.ints(1, list.get(i).getCount() + 1).findFirst().getAsInt();
+                            be.stack = new ItemStack(item, count);
+                            be.input = comb.getItem();
+                        }
+                        else be.stack = ItemStack.EMPTY;
                     }
                     else {
                         be.stack = be.stack1.copy();
                     }
                 }
+                ItemStack[] stack = {be.stack};
                 ItemStack[] stack3 = {be.items.get(10), be.items.get(11), be.items.get(12), be.items.get(13), be.items.get(14), be.items.get(15), be.items.get(16), be.items.get(17), be.items.get(18)};
-                int c2;
-                for (c2 = 0; c2 < stack3.length; ++c2) {
-                    if (stack3[c2].getItem().asItem() == Items.AIR) {
-                        stack3[c2] = be.stack;
-                        be.stack = null;
-                        break;
-                    }
-                    if (!stack3[c2].isEmpty() && be.stack.getItem() == stack3[c2].getItem() && (be.stack.getCount() + stack3[c2].getCount()) < 65) {
-                        stack3[c2].increment(1);
-                        be.stack = null;
-                        break;
-                    }
-                }
+                ItemStack[][] stackstack = BeeInventory.stackInventories(stack, stack3);
+                stack = stackstack[0];
+                stack3 = stackstack[1];
                 int c3;
                 for (c3 = 0; c3 < stack3.length; ++c3) {
                     be.items.set(10 + c3, stack3[c3]);
                 }
-                if (be.stack == null) {
+                if (stack.length == 0) {
                     comb.decrement(1);
                     be.craftingTime = 0;
                     be.stack = ItemStack.EMPTY;

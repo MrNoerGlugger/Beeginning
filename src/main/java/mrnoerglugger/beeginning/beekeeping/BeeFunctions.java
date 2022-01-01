@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.beekeeping;
 
+import mrnoerglugger.beeginning.blocks.blockentities.ApiaryBlockEntity;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -269,34 +270,29 @@ public class BeeFunctions {
         return list;
     }
 
-    public static boolean checkFlower(World world, BlockPos pos, NbtCompound nbt) {
-        int[] i = AoE[nbt.getIntArray("princess")[6]];
-        int index1;
-        int index2;
-        int index3;
-        for (index1 = 0; index1 < i[0]; index1++) {
-            for (index2 = 0; index2 < i[1]; index2++) {
-                for (index3 = 0; index3 < i[2]; index3++) {
-                    BlockPos pos2 = new BlockPos(pos.getX() - (i[0] / 2) + index1, pos.getY() - (i[1] / 2) + index2, pos.getZ() - (i[2] / 2) + index3);
-                    Block[] flowerBlocks = getFlowerBlock(nbt);
-                    int index4;
-                    for (index4 = 0; index4 < flowerBlocks.length; index4++) {
-                        if (world.getBlockState(pos2).getBlock() == flowerBlocks[index4]) {
-                            return true;
-                        }
-                    }
-                    Tag<Block>[] tags = getFlowerBlockTag(nbt);
-                    int index5;
-                    int index6;
-                    for (index5 = 0; index5 < tags.length; index5++) {
-                        Tag<Block> tags2 = tags[index5];
-                        if (tags2 != null) {
-                            for (index6 = 0; index6 < tags2.values().toArray().length; index6++) {
-                                if (world.getBlockState(pos2).getBlock().asItem().toString().equals(tags2.values().get(index6).asItem().toString())) {
-                                    return true;
-                                }
-                            }
-                        }
+    public static boolean checkFlower(World world, BlockPos[] pos, NbtCompound nbt, ApiaryBlockEntity be, int x, int y) {
+        pos = ArrayUtils.subarray(pos, x, y);
+        for (BlockPos pos2 : pos) {
+            if (checkFlowerBlock(world, pos2, nbt)) {
+                be.flowerPos = pos2;
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean checkFlowerBlock(World world, BlockPos pos, NbtCompound nbt) {
+        Block[] flowerBlocks = getFlowerBlock(nbt);
+        for (Block flowerBlock : flowerBlocks) {
+            if (world.getBlockState(pos).getBlock() == flowerBlock) {
+                return true;
+            }
+        }
+        Tag<Block>[] tags = getFlowerBlockTag(nbt);
+        for (Tag<Block> tag : tags) {
+            if (tag != null) {
+                for (int index = 0; index < tag.values().toArray().length; index++) {
+                    if (world.getBlockState(pos).getBlock().asItem().toString().equals(tag.values().get(index).asItem().toString())) {
+                        return true;
                     }
                 }
             }
@@ -384,6 +380,9 @@ public class BeeFunctions {
         int i = AoE[nbt.getIntArray("princess")[6]][0];
         return i;
     }
+    public static int getRangeRoundedDown(NbtCompound nbt) {
+        return (getDiameter(nbt) - 1) / 2;
+    }
     public static int getEffect(NbtCompound nbt) {
         int i = nbt.getIntArray("princess")[13];
         return i;
@@ -391,6 +390,20 @@ public class BeeFunctions {
     public static int getEffect(int[] i) {
         int i2 = effectArray[i[0]];
         return i2;
+    }
+    public static BlockPos[] generateAoEPositions(NbtCompound nbt, BlockPos pos) {
+        int i = getRangeRoundedDown(nbt);
+        int i2 = getDiameter(nbt);
+        BlockPos[] possiblePos = {};
+        for (int index1 = 0; index1 < i2; index1++) {
+            for (int index2 = 0; index2 < i2; index2++) {
+                for (int index3 = 0; index3 < i2; index3++) {
+                    BlockPos pos2 = new BlockPos(pos.getX() - i + index1, pos.getY() - i + index2, pos.getZ() - i + index3);
+                    possiblePos = ArrayUtils.add(possiblePos, pos2);
+                }
+            }
+        }
+        return possiblePos;
     }
 
     public static int getSpecies(String s) {

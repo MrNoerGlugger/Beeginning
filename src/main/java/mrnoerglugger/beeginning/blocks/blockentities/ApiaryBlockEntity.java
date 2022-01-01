@@ -3,6 +3,7 @@ package mrnoerglugger.beeginning.blocks.blockentities;
 import mrnoerglugger.beeginning.Beeginning;
 import mrnoerglugger.beeginning.beekeeping.BeeDefaultValues;
 import mrnoerglugger.beeginning.beekeeping.BeeFunctions;
+import mrnoerglugger.beeginning.beekeeping.BeeInventory;
 import mrnoerglugger.beeginning.screens.*;
 import mrnoerglugger.beeginning.setup.ImplementedInventory;
 import net.minecraft.block.BlockState;
@@ -40,25 +41,30 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
     int y2 = 0;
     int y3 = 0;
     int y4 = 0;
+    int y5 = 0;
     int lifetime;
+    NbtCompound queenNbt;
+    Item queenItem;
+    public BlockPos flowerPos;
+    BlockPos[] possibleFlowerPos;
     public ApiaryBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(Beeginning.APIARY_BLOCK_ENTITY, pos, state);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ApiaryBlockEntity be) {
-        ItemStack princess = (ItemStack) be.items.get(0);
-        ItemStack drone = (ItemStack) be.items.get(1);
-        ItemStack queen = (ItemStack) be.items.get(2);
-        NbtCompound queenNbt = null;
+        long startTime = System.nanoTime();
+        ItemStack princess = be.items.get(0);
+        ItemStack drone = be.items.get(1);
+        ItemStack queen = be.items.get(2);
         be.lifetime = queen.getDamage();
         boolean flowers = false;
         boolean time = false;
         boolean climate = false;
         if (!princess.isEmpty() && princess.getNbt() == null) {
-            princess = BeeFunctions.setPrincessValues(princess);
+            BeeFunctions.setPrincessValues(princess);
         }
         if (!drone.isEmpty() && drone.getNbt() == null) {
-            drone = BeeFunctions.setDroneValues(drone);
+            BeeFunctions.setDroneValues(drone);
         }
         if (!princess.isEmpty() && !drone.isEmpty() && be.breedingTime < be.breedingTimeTotal && be.y2 == 0) {
             ++be.breedingTime;
@@ -66,17 +72,22 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
         if (princess.isEmpty() || drone.isEmpty()) {
             be.breedingTime = 0;
         }
-        if (queen.isEmpty()) {
+        if (queen.isEmpty() || be.queenItem != queen.getItem()) {
             be.y = 0;
             be.y3 = 0;
+            be.y5 = 0;
+            be.queenItem = queen.getItem();
+            be.possibleFlowerPos = null;
         }
         if (!queen.isEmpty() && queen.getNbt() == null) {
-            queen = BeeFunctions.setDefaultQueenValues(queen);
+            BeeFunctions.setDefaultQueenValues(queen);
         }
         if (be.y2 == 1 && !queen.isEmpty()) {
             be.y2 = 0;
             be.y = 0;
-            queen = BeeFunctions.setQueenValues(queen, BeeFunctions.getPrincessValues(princess.getNbt())[0], BeeFunctions.getPrincessValues(princess.getNbt())[1], BeeFunctions.getDroneValues(drone.getNbt())[0], BeeFunctions.getDroneValues(drone.getNbt())[1]);
+            be.possibleFlowerPos = null;
+            BeeFunctions.setQueenValues(queen, BeeFunctions.getPrincessValues(princess.getNbt())[0], BeeFunctions.getPrincessValues(princess.getNbt())[1], BeeFunctions.getDroneValues(drone.getNbt())[0], BeeFunctions.getDroneValues(drone.getNbt())[1]);
+            be.queenNbt = queen.getNbt();
             be.lifetime = queen.getDamage();
             princess.decrement(1);
             drone.decrement(1);
@@ -86,17 +97,35 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
             queen.setDamage(be.lifetime);
         }
         if (!queen.isEmpty()) {
-            queenNbt = queen.getNbt();
+            be.queenNbt = queen.getNbt();
+            be.y5++;
+            if (be.y5 >= 50) {
+                be.y5 = 0;
+            }
         }
         if (!queen.isEmpty() && queen.getNbt().getIntArray("princess").length == 0) {
-            queen.setNbt(queenNbt);
+            queen.setNbt(be.queenNbt);
             if (queen.getNbt().getIntArray("princess").length == 0) {
                 BeeFunctions.setDefaultQueenValues(queen);
             }
             queen.setDamage(be.lifetime);
         }
         if (!queen.isEmpty()) {
-            flowers = BeeFunctions.checkFlower(world, pos, queen.getNbt());
+            if (be.possibleFlowerPos == null) {
+                be.possibleFlowerPos = BeeFunctions.generateAoEPositions(queen.getNbt(), pos);
+            }
+            if (be.flowerPos != null) {
+                flowers = BeeFunctions.checkFlowerBlock(world, be.flowerPos, queen.getNbt());
+            }
+            if (!flowers) {
+                System.out.println("hi");
+                be.flowerPos = null;
+                int x = be.possibleFlowerPos.length / 50 * be.y5;
+                if (x < be.possibleFlowerPos.length / 50 * 49) {
+                    flowers = BeeFunctions.checkFlower(world, be.possibleFlowerPos, queen.getNbt(), be, x, x + be.possibleFlowerPos.length / 50);
+                }
+                else flowers = BeeFunctions.checkFlower(world, be.possibleFlowerPos, queen.getNbt(), be, x, be.possibleFlowerPos.length + 1);
+            }
             time = BeeFunctions.checkTime(queen.getNbt(), world, pos);
             climate = BeeFunctions.checkClimate(world, pos, queen.getNbt());
             NbtCompound nbt = queen.getNbt();
@@ -113,6 +142,7 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
         }
         if (!princess.isEmpty() && !drone.isEmpty() && be.breedingTime == be.breedingTimeTotal && queen.isEmpty()) {
             Item item = BeeFunctions.getQueenItem(princess);
+            be.queenItem = item;
             be.items.set(2, item == null ? ItemStack.EMPTY : new ItemStack(item));
             be.breedingTime = 0;
             be.y2 = 1;
@@ -128,44 +158,16 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
             }
         }
         if (be.y3 == 1) {
-            queenNbt = queen.getNbt();
+            NbtCompound queenNbt = queen.getNbt();
             ItemStack[] stack = BeeFunctions.generateDescendantItemStackArray(BeeFunctions.generatePrincessItemStack(queenNbt), BeeFunctions.generateDroneItemStack(queenNbt, 0), BeeFunctions.generateDroneItemStack(queenNbt, 1), BeeFunctions.generateDroneItemStack(queenNbt, 2), BeeFunctions.generateDroneItemStack(queenNbt, 3));
             ItemStack[] stack2 = {be.items.get(3), be.items.get(4), be.items.get(5), be.items.get(6), be.items.get(7), be.items.get(8), be.items.get(9)};
-            int c1;
-            int c2;
-            for (c1 = stack.length - 1; c1 > -1; --c1) {
-                for (c2 = 0; c2 < stack2.length; ++c2) {
-                    if (stack2[c2].getItem().asItem() == Items.AIR) {
-                        stack2[c2] = stack[c1];
-                        stack = ArrayUtils.remove(stack, c1);
-                        if (stack.length == 0) {
-                            stack = null;
-                        }
-                        break;
-                    }
-                    if (stack2[c2].getItem().asItem() != Items.AIR && stack[c1].getItem() == stack2[c2].getItem() && (stack[c1].getCount() + stack2[c2].getCount()) < 65 && BeeFunctions.nbtComparison(stack[c1].getNbt(), stack2[c2].getNbt())) {
-                        stack2[c2].increment(1);
-                        stack = ArrayUtils.remove(stack, c1);
-                        if (stack.length == 0) {
-                            stack = null;
-                        }
-                        break;
-                    }
-                    if (c2 == 6) {
-                        stack = BeeFunctions.generateDescendantItemStackArray(BeeFunctions.generatePrincessItemStack(queenNbt), BeeFunctions.generateDroneItemStack(queenNbt, 0), BeeFunctions.generateDroneItemStack(queenNbt, 1), BeeFunctions.generateDroneItemStack(queenNbt, 2), BeeFunctions.generateDroneItemStack(queenNbt, 3));
-                        stack2 = new ItemStack[]{be.items.get(3), be.items.get(4), be.items.get(5), be.items.get(6), be.items.get(7), be.items.get(8), be.items.get(9)};
-                        break;
-                    }
-                }
-                if (!(stack == null) && stack.length > c1) {
-                    break;
-                }
-            }
-            int c3;
-            for (c3 = 0; c3 < stack2.length; ++c3) {
+            ItemStack[][] stackstack = BeeInventory.stackInventories(stack, stack2);
+            stack = stackstack[0];
+            stack2 = stackstack[1];
+            for (int c3 = 0; c3 < stack2.length; ++c3) {
                 be.items.set(3 + c3, stack2[c3]);
             }
-            if (stack == null) {
+            if (stack.length == 0) {
                 queen.decrement(1);
                 be.y3 = 0;
             }
@@ -207,6 +209,8 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
             BeeDefaultValues.createEffects(world, pos, state, be, BeeFunctions.getEffect(queen.getNbt()));
         }
         markDirty(world, pos, state);
+        long elapsedTime = System.nanoTime() - startTime;
+        System.out.println(elapsedTime);
     }
 
     @Override
