@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.OreCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class GlowingBee {
     public static final DefaultedList<ItemStack> GlowingCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] GlowingMutations = {{"advanced", "ferrum"}, {"advanced", "cuprum"}, {"advanced", "silica"}, {"noteworthy", "engineered"}, {"noteworthy", "crystal"}};
 
-    public static final Item GLOWING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item GLOWING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item GLOWING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item GLOWING_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item GLOWING_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item GLOWING_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerGlowingBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "glowing_princess"), GLOWING_PRINCESS);

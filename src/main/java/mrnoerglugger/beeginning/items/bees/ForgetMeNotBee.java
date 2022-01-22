@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.DyeCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class ForgetMeNotBee {
     public static final DefaultedList<ItemStack> ForgetMeNotCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] ForgetMeNotMutations = {{"advanced", "rainbow"}};
 
-    public static final Item FORGET_ME_NOT_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item FORGET_ME_NOT_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item FORGET_ME_NOT_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item FORGET_ME_NOT_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item FORGET_ME_NOT_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item FORGET_ME_NOT_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerForgetMeNotBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "forget_me_not_princess"), FORGET_ME_NOT_PRINCESS);

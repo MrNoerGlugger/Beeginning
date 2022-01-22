@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.items.bees;
 
 import mrnoerglugger.beeginning.blocks.HiveBlock;
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.BaseCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import mrnoerglugger.beeginning.tags.ItemTags;
@@ -26,9 +27,9 @@ public class ShroomyBee {
     public static final DefaultedList<ItemStack> ShroomyCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] ShroomyMutations = {};
 
-    public static final Item SHROOMY_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item SHROOMY_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item SHROOMY_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item SHROOMY_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item SHROOMY_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item SHROOMY_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
     public static final HiveBlock SHROOMY_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), SHROOMY_QUEEN);
 
     public static void registerShroomyBee() {

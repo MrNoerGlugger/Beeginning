@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.items.bees;
 
 import mrnoerglugger.beeginning.blocks.HiveBlock;
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.BaseCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import mrnoerglugger.beeginning.tags.ItemTags;
@@ -29,9 +30,9 @@ public class SnowingBee {
     public static final DefaultedList<ItemStack> SnowingCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] SnowingMutations = {};
 
-    public static final Item SNOWING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item SNOWING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item SNOWING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item SNOWING_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item SNOWING_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item SNOWING_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
     public static final HiveBlock SNOWING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), SNOWING_QUEEN);
 
     public static void registerSnowingBee() {

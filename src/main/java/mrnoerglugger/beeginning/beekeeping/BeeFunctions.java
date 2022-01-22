@@ -5,7 +5,6 @@ import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.tag.BlockTags;
@@ -15,10 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.system.CallbackI;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class BeeFunctions {
@@ -44,8 +41,8 @@ public class BeeFunctions {
     static Item[] QueenList;
     static Item[] PrincessList;
     static Item[] DroneList;
-    static DefaultedList[] OutputList;
-    static DefaultedList[] CombOutputList;
+    static DefaultedList<ItemStack>[] OutputList;
+    static DefaultedList<ItemStack>[] CombOutputList;
     static int[][][] MutationList;
     static double[] MutationChance;
     static int[] effectArray;
@@ -67,7 +64,7 @@ public class BeeFunctions {
         effectStrings = BeeDefaultValues.effectStrings;
     }
 
-    public static ItemStack setPrincessValues(ItemStack itemStack) {
+    public static void setPrincessValues(ItemStack itemStack) {
         NbtCompound nbt = new NbtCompound();
         String speciesName = itemStack.getItem().asItem().toString();
         int index = 0;
@@ -79,9 +76,8 @@ public class BeeFunctions {
         nbt.putIntArray("princess", defaultValues[index]);
         nbt.putIntArray("princess_inactive", defaultValues[index]);
         itemStack.setNbt(nbt);
-        return itemStack;
     }
-    public static ItemStack setDroneValues(ItemStack itemStack) {
+    public static void setDroneValues(ItemStack itemStack) {
         NbtCompound nbt = new NbtCompound();
         String speciesName = itemStack.getItem().asItem().toString();
         int index = 0;
@@ -93,9 +89,8 @@ public class BeeFunctions {
         nbt.putIntArray("drone", defaultValues[index]);
         nbt.putIntArray("drone_inactive", defaultValues[index]);
         itemStack.setNbt(nbt);
-        return itemStack;
     }
-    public static ItemStack setQueenValues(ItemStack itemStack, int[] i1, int[] i2, int[] i3, int[] i4) {
+    public static void setQueenValues(ItemStack itemStack, int[] i1, int[] i2, int[] i3, int[] i4) {
         NbtCompound nbt = new NbtCompound();
         nbt.putInt("Damage", itemStack.getDamage());
         nbt.putIntArray("princess", i1);
@@ -112,9 +107,8 @@ public class BeeFunctions {
             nbt.putIntArray("drone_descendant" + i + "_inactive", ii2[1]);
         }
         itemStack.setNbt(nbt);
-        return itemStack;
     }
-    public static ItemStack setDefaultQueenValues(ItemStack itemStack) {
+    public static void setDefaultQueenValues(ItemStack itemStack) {
         NbtCompound nbt = new NbtCompound();
         String speciesName = itemStack.getItem().asItem().toString();
         int index = 0;
@@ -135,26 +129,21 @@ public class BeeFunctions {
             nbt.putIntArray("drone_descendant" + i + "_inactive", getDroneIntArrayArray(nbt)[1]);
         }
         itemStack.setNbt(nbt);
-        return itemStack;
     }
 
     public static int[][] getPrincessValues(NbtCompound nbt) {
-        int[][] values = {nbt.getIntArray("princess"), nbt.getIntArray("princess_inactive")};
-        return values;
+        return new int[][]{nbt.getIntArray("princess"), nbt.getIntArray("princess_inactive")};
     }
     public static int[][] getDroneValues(NbtCompound nbt) {
-        int[][] values = {nbt.getIntArray("drone"), nbt.getIntArray("drone_inactive")};
-        return values;
+        return new int[][]{nbt.getIntArray("drone"), nbt.getIntArray("drone_inactive")};
     }
     public static int[][] getQueenValues(NbtCompound nbt) {
-        int[][] values = {nbt.getIntArray("princess"), nbt.getIntArray("princess_inactive"), nbt.getIntArray("drone"), nbt.getIntArray("drone_inactive")};
-        return values;
+        return new int[][]{nbt.getIntArray("princess"), nbt.getIntArray("princess_inactive"), nbt.getIntArray("drone"), nbt.getIntArray("drone_inactive")};
     }
 
     public static Item getQueenItem(ItemStack stack) {
         int i = stack.getNbt().getIntArray("princess")[0];
-        Item item = QueenList[i];
-        return item;
+        return QueenList[i];
     }
     public static ItemStack generatePrincessItemStack(NbtCompound nbt) {
         ItemStack princess = new ItemStack(PrincessList[nbt.getIntArray("princess_descendant")[0]]);
@@ -194,8 +183,7 @@ public class BeeFunctions {
         int[] i3 = nbt.getIntArray("drone");
         int[] i4 = nbt.getIntArray("drone_inactive");
         int[][] i5 = randomizeBeeStats(i1, i2, i3, i4);
-        int[][] ii = {i5[0], i5[1]};
-        return ii;
+        return new int[][]{i5[0], i5[1]};
     }
     public static int[][] getDroneIntArrayArray(NbtCompound nbt) {
         int[] i1 = nbt.getIntArray("princess");
@@ -203,8 +191,7 @@ public class BeeFunctions {
         int[] i3 = nbt.getIntArray("drone");
         int[] i4 = nbt.getIntArray("drone_inactive");
         int[][] i5 = randomizeBeeStats(i1, i2, i3, i4);
-        int[][] ii = {i5[0], i5[1]};
-        return ii;
+        return new int[][]{i5[0], i5[1]};
     }
 
     private static int[][] randomizeBeeStats(int[] i1, int[] i2, int[] i3, int[] i4) {
@@ -252,8 +239,7 @@ public class BeeFunctions {
 
     public static DefaultedList<ItemStack> getBeeOutput(NbtCompound nbt) {
         int[] i = getQueenValues(nbt)[0];
-        DefaultedList<ItemStack> itemStack = OutputList[i[0]];
-        return itemStack;
+        return OutputList[i[0]];
     }
     public static DefaultedList<ItemStack> getCombOutput(ItemStack item) {
         String speciesName = item.getItem().asItem().toString();
@@ -266,8 +252,7 @@ public class BeeFunctions {
                 return base_comb;
             }
         }
-        DefaultedList<ItemStack> list = CombOutputList[index];
-        return list;
+        return CombOutputList[index];
     }
 
     public static boolean checkFlower(World world, BlockPos[] pos, NbtCompound nbt, ApiaryBlockEntity be, int x, int y) {
@@ -282,12 +267,15 @@ public class BeeFunctions {
     }
     public static boolean checkFlowerBlock(World world, BlockPos pos, NbtCompound nbt) {
         Block[] flowerBlocks = getFlowerBlock(nbt);
-        for (Block flowerBlock : flowerBlocks) {
+        Tag<Block>[] tags = getFlowerBlockTag(nbt);
+        return checkFlowerBlock(world, pos, flowerBlocks, tags);
+    }
+    public static boolean checkFlowerBlock(World world, BlockPos pos, Block[] blocks, Tag<Block>[] tags) {
+        for (Block flowerBlock : blocks) {
             if (world.getBlockState(pos).getBlock() == flowerBlock) {
                 return true;
             }
         }
-        Tag<Block>[] tags = getFlowerBlockTag(nbt);
         for (Tag<Block> tag : tags) {
             if (tag != null) {
                 for (int index = 0; index < tag.values().toArray().length; index++) {
@@ -308,17 +296,11 @@ public class BeeFunctions {
         int[][] climateTol = getClimateTolerance(nbt);
         int[] tempTol = climateTol[0];
         int[] downTol = climateTol[1];
-        if (temp >= ((temp2 - 10) + tempTol[0]) && temp <= ((temp2 + 10) + tempTol[1]) && down >= ((down2 - 20) + downTol[0]) && down <= ((down2 + 20) + downTol[1])) {
-            return true;
-        }
-        return false;
+        return temp >= ((temp2 - 10) + tempTol[0]) && temp <= ((temp2 + 10) + tempTol[1]) && down >= ((down2 - 20) + downTol[0]) && down <= ((down2 + 20) + downTol[1]);
     }
     public static boolean checkTime(NbtCompound nbt, World world, BlockPos pos) {
         int dayTime = (int) (world.getTimeOfDay() % 24000);
-        boolean timeTime2 = false;
-        if (dayTime <= 13000 || dayTime >= 23000) {
-            timeTime2 = true;
-        }
+        boolean timeTime2 = dayTime <= 13000 || dayTime >= 23000;
         boolean timeTime = time[nbt.getIntArray("princess")[7]];
         BlockPos pos1 = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
         BlockPos pos2 = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
@@ -330,10 +312,7 @@ public class BeeFunctions {
         if (timeTime) {
             return true;
         }
-        else if (Arrays.stream(lightlevels).max().getAsInt() > 0 & timeTime2) {
-            return true;
-        }
-        else return false;
+        else return Arrays.stream(lightlevels).max().getAsInt() > 0 & timeTime2;
     }
 
     public static boolean nbtComparison(NbtCompound nbt1, NbtCompound nbt2) {
@@ -352,20 +331,16 @@ public class BeeFunctions {
     }
 
     public static double getProduction(NbtCompound nbt) {
-        double i = production[nbt.getIntArray("princess")[2]];
-        return i;
+        return production[nbt.getIntArray("princess")[2]];
     }
     public static double getLifetime(NbtCompound nbt) {
-        double i = lifespan[nbt.getIntArray("princess")[1]];
-        return i;
+        return lifespan[nbt.getIntArray("princess")[1]];
     }
     public static Block[] getFlowerBlock(NbtCompound nbt) {
-        Block[] i = flowerBlocks[nbt.getIntArray("princess")[4]];
-        return i;
+        return flowerBlocks[nbt.getIntArray("princess")[4]];
     }
     public static Tag<Block>[] getFlowerBlockTag(NbtCompound nbt) {
-        Tag<Block>[] i = flowerTags[nbt.getIntArray("princess")[5]];
-        return i;
+        return flowerTags[nbt.getIntArray("princess")[5]];
     }
     public static boolean getFraming(NbtCompound nbt) {
         return framing[nbt.getIntArray("princess")[8]];
@@ -377,19 +352,16 @@ public class BeeFunctions {
         return new int[][]{temperatureTolerance[nbt.getIntArray("princess")[11]], downfallTolerance[nbt.getIntArray("princess")[12]]};
     }
     public static int getDiameter(NbtCompound nbt) {
-        int i = AoE[nbt.getIntArray("princess")[6]][0];
-        return i;
+        return AoE[nbt.getIntArray("princess")[6]][0];
     }
     public static int getRangeRoundedDown(NbtCompound nbt) {
         return (getDiameter(nbt) - 1) / 2;
     }
     public static int getEffect(NbtCompound nbt) {
-        int i = nbt.getIntArray("princess")[13];
-        return i;
+        return nbt.getIntArray("princess")[13];
     }
     public static int getEffect(int[] i) {
-        int i2 = effectArray[i[0]];
-        return i2;
+        return effectArray[i[0]];
     }
     public static BlockPos[] generateAoEPositions(NbtCompound nbt, BlockPos pos) {
         int i = getRangeRoundedDown(nbt);

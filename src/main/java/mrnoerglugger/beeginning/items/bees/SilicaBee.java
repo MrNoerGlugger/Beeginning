@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.OreCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class SilicaBee {
     public static final DefaultedList<ItemStack> SilicaCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] SilicaMutations = {{"noteworthy", "engineered"}, {"noteworthy", "aurum"}, {"noteworthy", "lazurite"}, {"noteworthy", "crystal"}, {"extraordinary", "shining"}, {"extraordinary", "smaragdus"}};
 
-    public static final Item SILICA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item SILICA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item SILICA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item SILICA_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item SILICA_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item SILICA_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerSilicaBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "silica_princess"), SILICA_PRINCESS);

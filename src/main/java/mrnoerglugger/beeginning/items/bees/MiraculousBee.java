@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.HoneyDrops;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -20,9 +21,9 @@ public class MiraculousBee {
     public static final DefaultedList<ItemStack> MiraculousCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] MiraculousMutations = {};
 
-    public static final Item MIRACULOUS_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item MIRACULOUS_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item MIRACULOUS_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item MIRACULOUS_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item MIRACULOUS_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item MIRACULOUS_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerMiraculousBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "miraculous_princess"), MIRACULOUS_PRINCESS);

@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.blocks;
 
 import mrnoerglugger.beeginning.Beeginning;
+import mrnoerglugger.beeginning.beekeeping.BeeFlowerizing;
 import mrnoerglugger.beeginning.blocks.blockentities.ApiaryBlockEntity;
 import mrnoerglugger.beeginning.blocks.blockentities.ApiaryBlockEntityType;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -52,6 +53,7 @@ public class ApiaryBlock extends Apiary {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        BeeFlowerizing.registerFlowerizer(pos);
         return new ApiaryBlockEntityType(pos, state);
     }
 

@@ -4,8 +4,10 @@
   "package": "mrnoerglugger.beeginning.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "BeeItemMixin",
     "DefaultBiomeFeatureMixin",
-    "EndBiomeMixin"
+    "EndBiomeMixin",
+    "ServerWorldMixin"
   ],
   "client": [
   ],

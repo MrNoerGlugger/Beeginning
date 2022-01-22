@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.items.bees;
 
 import mrnoerglugger.beeginning.blocks.HiveBlock;
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.BaseCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import mrnoerglugger.beeginning.tags.ItemTags;
@@ -26,9 +27,9 @@ public class BloomingBee {
     public static final DefaultedList<ItemStack> BloomingCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] BloomingMutations = {{"ordinary", "amaryllis"}, {"ordinary", "begonia"}, {"ordinary", "fuchsia"}, {"ordinary", "forget_me_not"}, {"ordinary", "marigold"}, {"ordinary", "bells_of_ireland"}, {"ordinary", "azalea"}, {"ordinary", "santolina"}, {"ordinary", "allium"}, {"ordinary", "ipomoea"}, {"ordinary", "lavender"}, {"ordinary", "periwinkle"}, {"ordinary", "cattleya_velutina"}, {"ordinary", "gerbera_daisy"}, {"ordinary", "rose"}, {"ordinary", "queen_of_the_night_tulip"}, {"advanced", "rainbow"}};
 
-    public static final Item BLOOMING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item BLOOMING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item BLOOMING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item BLOOMING_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item BLOOMING_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item BLOOMING_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
     public static final HiveBlock BLOOMING_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), BLOOMING_QUEEN);
 
     public static void registerBloomingBee() {

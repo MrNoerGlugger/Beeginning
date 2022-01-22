@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.blocks;
 
+import mrnoerglugger.beeginning.beekeeping.BeeFlowerizing;
 import mrnoerglugger.beeginning.blocks.blockentities.ApiaryBlockEntity;
 import mrnoerglugger.beeginning.blocks.blockentities.ApiaryBlockEntityType;
 import net.minecraft.block.*;
@@ -59,6 +60,7 @@ public abstract class Apiary extends BlockWithEntity implements InventoryProvide
 
     @Override
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state) {
+        BeeFlowerizing.removeFlowerizer(pos);
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof ApiaryBlockEntity) {
             ItemScatterer.spawn((World) world, pos, (ApiaryBlockEntity) blockEntity);

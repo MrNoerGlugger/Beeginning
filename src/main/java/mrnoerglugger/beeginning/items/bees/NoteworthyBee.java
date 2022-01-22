@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.HoneyDrops;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class NoteworthyBee {
     public static final DefaultedList<ItemStack> NoteworthyCombOutput = DefaultedList.ofSize(16, ItemStack.EMPTY);
     public static String[][] NoteworthyMutations = {};
 
-    public static final Item NOTEWORTHY_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item NOTEWORTHY_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item NOTEWORTHY_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item NOTEWORTHY_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item NOTEWORTHY_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item NOTEWORTHY_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerNoteworthyBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "noteworthy_princess"), NOTEWORTHY_PRINCESS);

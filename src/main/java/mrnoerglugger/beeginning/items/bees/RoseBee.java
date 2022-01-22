@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.items.bees;
 
 import mrnoerglugger.beeginning.blocks.HiveBlock;
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.DyeCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import mrnoerglugger.beeginning.tags.ItemTags;
@@ -25,9 +26,9 @@ public class RoseBee {
     public static final DefaultedList<ItemStack> RoseCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] RoseMutations = {{"advanced", "rainbow"}};
 
-    public static final Item ROSE_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item ROSE_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item ROSE_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item ROSE_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item ROSE_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item ROSE_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerRoseBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "rose_princess"), ROSE_PRINCESS);

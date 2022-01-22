@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.Frames;
 import mrnoerglugger.beeginning.items.combs.OreCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
@@ -22,9 +23,9 @@ public class CuprumBee {
     public static final DefaultedList<ItemStack> CuprumCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] CuprumMutations = {{"noteworthy", "engineered"}, {"noteworthy", "aurum"}, {"noteworthy", "lazurite"}, {"noteworthy", "crystal"}};
 
-    public static final Item CUPRUM_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item CUPRUM_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item CUPRUM_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item CUPRUM_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item CUPRUM_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item CUPRUM_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerCuprumBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "cuprum_princess"), CUPRUM_PRINCESS);

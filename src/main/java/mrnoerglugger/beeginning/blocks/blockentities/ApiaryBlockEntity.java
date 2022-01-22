@@ -2,6 +2,7 @@ package mrnoerglugger.beeginning.blocks.blockentities;
 
 import mrnoerglugger.beeginning.Beeginning;
 import mrnoerglugger.beeginning.beekeeping.BeeDefaultValues;
+import mrnoerglugger.beeginning.beekeeping.BeeFlowerizing;
 import mrnoerglugger.beeginning.beekeeping.BeeFunctions;
 import mrnoerglugger.beeginning.beekeeping.BeeInventory;
 import mrnoerglugger.beeginning.screens.*;
@@ -91,6 +92,7 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
             be.lifetime = queen.getDamage();
             princess.decrement(1);
             drone.decrement(1);
+            BeeFlowerizing.flowerizerChanged = true;
         }
 
         if (!queen.isEmpty() && queen.getNbt() == null) {
@@ -111,21 +113,20 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
             queen.setDamage(be.lifetime);
         }
         if (!queen.isEmpty()) {
-            if (be.possibleFlowerPos == null) {
-                be.possibleFlowerPos = BeeFunctions.generateAoEPositions(queen.getNbt(), pos);
-            }
-            if (be.flowerPos != null) {
-                flowers = BeeFunctions.checkFlowerBlock(world, be.flowerPos, queen.getNbt());
-            }
-            if (!flowers) {
-                System.out.println("hi");
-                be.flowerPos = null;
-                int x = be.possibleFlowerPos.length / 50 * be.y5;
-                if (x < be.possibleFlowerPos.length / 50 * 49) {
-                    flowers = BeeFunctions.checkFlower(world, be.possibleFlowerPos, queen.getNbt(), be, x, x + be.possibleFlowerPos.length / 50);
-                }
-                else flowers = BeeFunctions.checkFlower(world, be.possibleFlowerPos, queen.getNbt(), be, x, be.possibleFlowerPos.length + 1);
-            }
+            //if (be.possibleFlowerPos == null) {
+            //    be.possibleFlowerPos = BeeFunctions.generateAoEPositions(queen.getNbt(), pos);
+            //}
+            //if (be.flowerPos != null) {
+            //    flowers = BeeFunctions.checkFlowerBlock(world, be.flowerPos, queen.getNbt());
+            //}
+            //if (!flowers) {
+            //    be.flowerPos = null;
+            //    int x = be.possibleFlowerPos.length / 50 * be.y5;
+            //    if (x < be.possibleFlowerPos.length / 50 * 49) {
+            //        flowers = BeeFunctions.checkFlower(world, be.possibleFlowerPos, queen.getNbt(), be, x, x + be.possibleFlowerPos.length / 50);
+            //    }
+            //    else flowers = BeeFunctions.checkFlower(world, be.possibleFlowerPos, queen.getNbt(), be, x, be.possibleFlowerPos.length + 1);
+            //}
             time = BeeFunctions.checkTime(queen.getNbt(), world, pos);
             climate = BeeFunctions.checkClimate(world, pos, queen.getNbt());
             NbtCompound nbt = queen.getNbt();
@@ -170,6 +171,7 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
             if (stack.length == 0) {
                 queen.decrement(1);
                 be.y3 = 0;
+                BeeFlowerizing.flowerizerChanged = true;
             }
         }
         if (be.productionTime > be.y && !queen.isEmpty() && !queen.getNbt().isEmpty() && be.y4 == 1) {
@@ -210,7 +212,7 @@ public class ApiaryBlockEntity extends BlockEntity implements ImplementedInvento
         }
         markDirty(world, pos, state);
         long elapsedTime = System.nanoTime() - startTime;
-        System.out.println(elapsedTime);
+        //System.out.println(elapsedTime);
     }
 
     @Override

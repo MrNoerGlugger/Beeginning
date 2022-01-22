@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.DyeCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class CattleyaVelutinaBee {
     public static final DefaultedList<ItemStack> CattleyaVelutinaCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] CattleyaVelutinaMutations = {{"advanced", "rainbow"}};
 
-    public static final Item CATTLEYA_VELUTINA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item CATTLEYA_VELUTINA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item CATTLEYA_VELUTINA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item CATTLEYA_VELUTINA_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item CATTLEYA_VELUTINA_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item CATTLEYA_VELUTINA_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerCattleyaVelutinaBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "cattleya_velutina_princess"), CATTLEYA_VELUTINA_PRINCESS);

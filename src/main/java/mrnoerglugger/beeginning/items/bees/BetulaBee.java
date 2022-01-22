@@ -1,9 +1,9 @@
 package mrnoerglugger.beeginning.items.bees;
 
 import mrnoerglugger.beeginning.blocks.HiveBlock;
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.BaseCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
-import mrnoerglugger.beeginning.tags.ItemTags;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
@@ -28,9 +28,9 @@ public class BetulaBee {
     public static final DefaultedList<ItemStack> BetulaCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] BetulaMutations = {};
 
-    public static final Item BETULA_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item BETULA_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item BETULA_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item BETULA_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item BETULA_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item BETULA_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
     public static final HiveBlock BETULA_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(12).requiresTool().strength(1.5f), BETULA_QUEEN);
 
     public static void registerBetulaBee() {

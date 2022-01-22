@@ -1,6 +1,7 @@
 package mrnoerglugger.beeginning.items.bees;
 
 import mrnoerglugger.beeginning.blocks.HiveBlock;
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.BaseCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import mrnoerglugger.beeginning.tags.ItemTags;
@@ -28,9 +29,9 @@ public class ThicketBee {
     public static final DefaultedList<ItemStack> ThicketCombOutput = DefaultedList.ofSize(4, ItemStack.EMPTY);
     public static String[][] ThicketMutations = {};
 
-    public static final Item THICKET_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item THICKET_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item THICKET_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item THICKET_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item THICKET_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item THICKET_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
     public static final HiveBlock THICKET_HIVE = new HiveBlock(FabricBlockSettings.of(Material.WOOD).luminance(8).requiresTool().strength(1.5f), THICKET_QUEEN);
 
     public static void registerThicketBee() {

@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.OreCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class ShiningBee {
     public static final DefaultedList<ItemStack> ShiningCombOutput = DefaultedList.ofSize(2, ItemStack.EMPTY);
     public static String[][] ShiningMutations = {{"miraculous", "primordial"}};
 
-    public static final Item SHINING_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item SHINING_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item SHINING_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item SHINING_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item SHINING_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item SHINING_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerShiningBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "shining_princess"), SHINING_PRINCESS);

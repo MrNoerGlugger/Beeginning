@@ -1,5 +1,6 @@
 package mrnoerglugger.beeginning.items.bees;
 
+import mrnoerglugger.beeginning.items.BeeItem;
 import mrnoerglugger.beeginning.items.combs.DyeCombs;
 import mrnoerglugger.beeginning.items.combs.TierCombs;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -21,9 +22,9 @@ public class PeriwinkleBee {
     public static final DefaultedList<ItemStack> PeriwinkleCombOutput = DefaultedList.ofSize(1, ItemStack.EMPTY);
     public static String[][] PeriwinkleMutations = {{"advanced", "rainbow"}};
 
-    public static final Item PERIWINKLE_PRINCESS = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
-    public static final Item PERIWINKLE_DRONE = new Item(new FabricItemSettings().group(BEE_GROUP));
-    public static final Item PERIWINKLE_QUEEN = new Item(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
+    public static final Item PERIWINKLE_PRINCESS = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP));
+    public static final Item PERIWINKLE_DRONE = new BeeItem(new FabricItemSettings().group(BEE_GROUP));
+    public static final Item PERIWINKLE_QUEEN = new BeeItem(new FabricItemSettings().maxCount(1).group(BEE_GROUP).maxDamage(2000));
 
     public static void registerPeriwinkleBee() {
         Registry.register(Registry.ITEM, new Identifier(MODID, "periwinkle_princess"), PERIWINKLE_PRINCESS);
