@@ -220,7 +220,7 @@ public class BeeFunctions {
                 index++;
             }
         }
-        int[][] possibleMutations = MutationList[ii[0][0]];
+        int[][] possibleMutations = MutationList[ii[0][0]].clone();
         int index1;
         if (!(possibleMutations.length <= 0) && !(possibleMutations[0].length <= 0)) {
             for (index1 = 0; index1 < possibleMutations.length; index1++) {
@@ -228,7 +228,7 @@ public class BeeFunctions {
                     int speciesType = possibleMutations[index1][1];
                     if (Math.random() < MutationChance[speciesType]) {
                         int i = random.ints(0, 2).findFirst().getAsInt();
-                        ii[i] = defaultValues[speciesType];
+                        ii[i] = defaultValues[speciesType].clone();
                     }
                     break;
                 }

@@ -14,10 +14,7 @@ import mrnoerglugger.beeginning.screens.BeePhoneScreenHandler;
 import mrnoerglugger.beeginning.screens.CentrifugeScreenHandler;
 import mrnoerglugger.beeginning.setup.ModBlocks;
 import mrnoerglugger.beeginning.setup.ModItems;
-import mrnoerglugger.beeginning.world.EndHiveFeature;
-import mrnoerglugger.beeginning.world.HiveFeature;
-import mrnoerglugger.beeginning.world.NetherHiveFeature;
-import mrnoerglugger.beeginning.world.TreeHiveFeature;
+import mrnoerglugger.beeginning.world.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -28,6 +25,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
@@ -70,25 +69,18 @@ public class Beeginning implements ModInitializer {
     private static final Feature<DefaultFeatureConfig> TREE_HIVE = new TreeHiveFeature(DefaultFeatureConfig.CODEC);
     private static final Feature<DefaultFeatureConfig> END_HIVE = new EndHiveFeature(DefaultFeatureConfig.CODEC);
     private static final Feature<DefaultFeatureConfig> NETHER_HIVE = new NetherHiveFeature(DefaultFeatureConfig.CODEC);
+    private static final Feature<DefaultFeatureConfig> ORE_HIVE = new OreHiveFeature(DefaultFeatureConfig.CODEC);
     public static final ConfiguredFeature<?, ?> HIVING = HIVE.configure(FeatureConfig.DEFAULT);
     public static final ConfiguredFeature<?, ?> END_HIVING = END_HIVE.configure(FeatureConfig.DEFAULT);
     public static final ConfiguredFeature<?, ?> TREE_HIVING = TREE_HIVE.configure(FeatureConfig.DEFAULT);
     public static final ConfiguredFeature<?, ?> NETHER_HIVING = NETHER_HIVE.configure(FeatureConfig.DEFAULT);
-    public static final ConfiguredFeature<?, ?> HIVE_ORE = Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES, CavingBee.CAVING_HIVE.getDefaultState(), 3));
+    public static final ConfiguredFeature<?, ?> ORE_HIVING = ORE_HIVE.configure(FeatureConfig.DEFAULT);
 
     private static Identifier register(String id, StatFormatter formatter) {
         Identifier identifier = new Identifier(id);
         Registry.register(Registry.CUSTOM_STAT, (String)id, identifier);
         CUSTOM.getOrCreateStat(identifier, formatter);
         return identifier;
-    }
-
-    private static List<PlacementModifier> modifiers(PlacementModifier countModifier, PlacementModifier heightModifier) {
-        return List.of(countModifier, SquarePlacementModifier.of(), heightModifier, BiomePlacementModifier.of());
-    }
-
-    private static List<PlacementModifier> modifiersWithCount(int count, PlacementModifier heightModfier) {
-        return modifiers(CountPlacementModifier.of(count), heightModfier);
     }
 
     static {
@@ -101,7 +93,7 @@ public class Beeginning implements ModInitializer {
         END_HIVING_FEATURE = PlacedFeatures.register("end_hive", END_HIVING.withPlacement(SquarePlacementModifier.of(), RarityFilterPlacementModifier.of(75), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP));
         TREE_HIVING_FEATURE = PlacedFeatures.register("tree_hive", TREE_HIVING.withPlacement(SquarePlacementModifier.of(), CountPlacementModifier.of(2), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP));
         NETHER_HIVING_FEATURE = PlacedFeatures.register("nether_hive", NETHER_HIVING.withPlacement(SquarePlacementModifier.of(), CountPlacementModifier.of(20), PlacedFeatures.OCEAN_FLOOR_WG_HEIGHTMAP));
-        HIVE_ORE_FEATURE = PlacedFeatures.register("hive_ore", HIVE_ORE.withPlacement(modifiersWithCount(20, HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(10)))));
+        HIVE_ORE_FEATURE = PlacedFeatures.register("hive_ore", ORE_HIVING.withPlacement(SquarePlacementModifier.of(), CountPlacementModifier.of(10), PlacedFeatures.BOTTOM_TO_TOP_RANGE));
     }
 
     @Override
@@ -116,6 +108,7 @@ public class Beeginning implements ModInitializer {
         Registry.register(Registry.FEATURE, new Identifier("beeginning", "tree_hive"), TREE_HIVE);
         Registry.register(Registry.FEATURE, new Identifier("beeginning", "end_hive"), END_HIVE);
         Registry.register(Registry.FEATURE, new Identifier("beeginning", "nether_hive"), NETHER_HIVE);
+        Registry.register(Registry.FEATURE, new Identifier("beeginning", "hive_ore"), ORE_HIVE);
         RegistryKey<ConfiguredFeature<?, ?>> hive = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, new Identifier("beeginning", "hive"));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, hive.getValue(), HIVING);
         RegistryKey<ConfiguredFeature<?, ?>> end_hive = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, new Identifier("beeginning", "end_hive"));
@@ -125,7 +118,7 @@ public class Beeginning implements ModInitializer {
         RegistryKey<ConfiguredFeature<?, ?>> nether_hive = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, new Identifier("beeginning", "nether_hive"));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, nether_hive.getValue(), NETHER_HIVING);
         RegistryKey<ConfiguredFeature<?, ?>> hive_ore = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, new Identifier("beeginning", "hive_ore"));
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, hive_ore.getValue(), HIVE_ORE);
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, hive_ore.getValue(), ORE_HIVING);
         BeeDefaultValues.createEffectArrays();
         BeeDefaultValues.registerBeeValues(BeeDefaultValues.createBaseBeeList());
         BeeDefaultValues.createBeeArrays();
